@@ -1,0 +1,17 @@
+name: autoupdate
+on:
+  push:
+    branches:
+      - main
+jobs:
+  autoupdate:
+    name: autoupdate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
+    steps:
+      - uses: docker://chinthakagodawita/autoupdate-action:v1
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
