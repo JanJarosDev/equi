@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.dokka)
 }
 
 android {
@@ -32,6 +33,14 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+    }
+}
+
+tasks{
+    register<Jar>("dokkaJar") {
+        from(dokkaHtml)
+        dependsOn(dokkaHtml)
+        archiveClassifier.set("javadoc")
     }
 }
 
