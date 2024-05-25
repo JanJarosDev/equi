@@ -10,7 +10,11 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+    includeBuild("collect-sarif-plugin") {
+        name = "collect-sarif-plugin-build"
+    }
 }
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -21,3 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Porfolio Delta"
 include(":app")
+include(":collect-sarif-plugin")
