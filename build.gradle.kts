@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.jetbrains.dokka) apply false
     alias(libs.plugins.gitlab.detekt) apply false
-    alias(libs.plugins.appyx.collect.sarif) apply false
+    alias(libs.plugins.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
 }
 

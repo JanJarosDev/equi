@@ -35,7 +35,7 @@ class DetektPlugin : Plugin<Project> {
                 reports.sarif.required.set(true)
             }
 
-            rootProject.plugins.withId("appyx-collect-sarif") {
+            rootProject.plugins.withId("collect-sarif") {
                 rootProject.tasks.named(
                     CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
                     ReportMergeTask::class.java,

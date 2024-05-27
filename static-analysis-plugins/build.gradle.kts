@@ -13,16 +13,16 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        create("appyx-collect-sarif") {
-            id = "appyx-collect-sarif"
+        create("collect-sarif") {
+            id = "collect-sarif"
             implementationClass = "CollectSarifPlugin"
         }
-        create("appyx-lint") {
-            id = "appyx-lint"
+        create("collect-sarif-lint") {
+            id = "collect-sarif-lint"
             implementationClass = "LintPlugin"
         }
-        create("appyx-detekt") {
-            id = "appyx-detekt"
+        create("collect-sarif-detekt") {
+            id = "collect-sarif-detekt"
             implementationClass = "DetektPlugin"
         }
     }

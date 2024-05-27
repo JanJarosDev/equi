@@ -10,7 +10,7 @@ material = "1.10.0"
 dokka = "1.9.10"
 detekt = "1.23.6"
 kover = "0.8.0"
-collect-sarif = "1.0.0"
+collectSarifVersion = "1.0.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,4 +28,4 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-appyx-collect-sarif = { id = "appyx-collect-sarif", version.ref = "collect-sarif" }
+collect-sarif = { id = "collect-sarif", version.ref = "collectSarifVersion" }
