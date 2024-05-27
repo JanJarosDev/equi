@@ -10,9 +10,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    includeBuild("collect-sarif-plugin") {
-        name = "collect-sarif-plugin-build"
-    }
+    includeBuild("collect-sarif-plugin")
 }
 
 dependencyResolutionManagement {
@@ -25,4 +23,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "Porfolio Delta"
 include(":app")
-include(":collect-sarif-plugin")

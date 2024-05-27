@@ -1,5 +1,27 @@
-val buildTask = tasks.register("buildPlugins")
+plugins {
+    `java-gradle-plugin`
+    `kotlin-dsl`
+    alias(libs.plugins.gitlab.detekt)
+}
 
-subprojects {
-    buildTask.configure { dependsOn(tasks.named("build")) }
+dependencies {
+    implementation(libs.plugin.android)
+    implementation(libs.plugin.detekt)
+}
+
+gradlePlugin {
+    plugins {
+        create("appyx-collect-sarif") {
+            id = "appyx-collect-sarif"
+            implementationClass = "CollectSarifPlugin"
+        }
+        create("appyx-lint") {
+            id = "appyx-lint"
+            implementationClass = "LintPlugin"
+        }
+        create("appyx-detekt") {
+            id = "appyx-detekt"
+            implementationClass = "DetektPlugin"
+        }
+    }
 }
