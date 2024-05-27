@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.gitlab.detekt)
 }
 
+version = "1.0.0"
+
 dependencies {
     implementation(libs.plugin.android)
     implementation(libs.plugin.detekt)

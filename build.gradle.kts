@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.jetbrains.dokka) apply false
-    id("io.gitlab.arturbosch.detekt") version "1.23.6" apply false
-    id("appyx-collect-sarif")
+    alias(libs.plugins.gitlab.detekt) apply false
+    alias(libs.plugins.appyx.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
 }
 
