@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrains.dokka) apply false
     id("io.gitlab.arturbosch.detekt") version "1.23.6" apply false
     id("appyx-collect-sarif")
+    alias(libs.plugins.jetbrains.kotlinx.kover) apply true
 }
 
 subprojects {
@@ -40,6 +41,16 @@ subprojects {
 
         tasks.withType<DetektCreateBaselineTask>().configureEach {
             jvmTarget = "1.8"
+        }
+    }
+}
+
+kover {
+    reports {
+        filters {
+            excludes {
+                //TODO exclude when files are ready
+            }
         }
     }
 }

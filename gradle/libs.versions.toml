@@ -9,6 +9,7 @@ appcompat = "1.6.1"
 material = "1.10.0"
 dokka = "1.9.10"
 detekt = "1.23.6"
+kover = "0.8.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,3 +26,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
