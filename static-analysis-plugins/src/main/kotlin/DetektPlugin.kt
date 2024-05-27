@@ -47,9 +47,6 @@ class DetektPlugin : Plugin<Project> {
         }
 
         target.dependencies {
-            // We add this to all modules (even ones that don't use Compose).
-            // Determining if the module uses Compose is very messy, and as this doesn't appear to
-            // cause an problem this should be okay for now.
             add(
                 "detektPlugins",
                 target

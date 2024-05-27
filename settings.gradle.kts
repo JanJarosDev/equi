@@ -10,7 +10,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
-    includeBuild("collect-sarif-plugin")
+    includeBuild("static-analysis-plugins")
 }
 
 dependencyResolutionManagement {

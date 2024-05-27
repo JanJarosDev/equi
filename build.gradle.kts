@@ -11,7 +11,7 @@ plugins {
 
 subprojects {
 
-    if (name != "collect-sarif-plugin") {
+    if (name != "static-analysis-plugins") {
         apply(plugin = "org.jetbrains.dokka")
 
         plugins.withId("org.jetbrains.dokka") {
