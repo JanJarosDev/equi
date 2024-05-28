@@ -6,33 +6,6 @@ plugins {
 
 version = "1.0.0"
 
-tasks.withType<Test> {
-    enabled = false
-}
-
-tasks.withType<JavaCompile> {
-    if (name.contains("Test")) {
-        enabled = false
-    }
-}
-
-tasks.named("testClasses") {
-    enabled = false
-}
-
-tasks.named("compileTestJava") {
-    enabled = false
-}
-
-tasks.named("processTestResources") {
-    enabled = false
-}
-
-tasks.named("compileTestKotlin") {
-    enabled = false
-}
-
-
 dependencies {
     implementation(libs.plugin.android)
     implementation(libs.plugin.detekt)
