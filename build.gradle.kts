@@ -26,7 +26,7 @@ subprojects {
     }
 
     apply(plugin = "io.gitlab.arturbosch.detekt")
-    apply(plugin = "collect-sarif") // Apply your custom plugin
+    apply(plugin = "collect-sarif")
 
     plugins.withId("io.gitlab.arturbosch.detekt") {
         extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
