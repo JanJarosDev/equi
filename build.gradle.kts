@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -25,6 +26,7 @@ subprojects {
     }
 
     apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "collect-sarif") // Apply your custom plugin
 
     plugins.withId("io.gitlab.arturbosch.detekt") {
         extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
