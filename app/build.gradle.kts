@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
+  //  id("collect-sarif-detekt")
+    id("collect-sarif-lint")
 }
 
 android {
