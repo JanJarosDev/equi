@@ -36,11 +36,34 @@ jobs:
           distribution: 'zulu'
           java-version: '21'
 
+      - uses: gradle/wrapper-validation-action@v1
+
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            build
+            mergeLintSarif
+            mergeDetektSarif
+            :plugins:buildPlugins
+            --continue
+
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
+
+      - uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: build/lint-merged.sarif
+          category: lint
+
+      - uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: build/detekt-merged.sarif
+          category: detekt
 
       - if: matrix.build-mode == 'manual'
         shell: bash
