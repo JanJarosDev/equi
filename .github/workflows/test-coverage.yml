@@ -23,11 +23,10 @@ jobs:
         id: kover
         uses: mi-kas/kover-report@v1
         with:
-          path: |
-            ${{ github.workspace }}/build/reports/kover/report.xml
+          path: ${{ github.workspace }}/build/reports/kover/report.xml
           title: Code Coverage
           update-comment: true
           min-coverage-overall: 80
           min-coverage-changed-files: 80
           coverage-counter-type: LINE
-          token: '${{ secrets.MY_KOVER_TOKEN }}'
+          token: ${{ secrets.MY_KOVER_TOKEN }}
