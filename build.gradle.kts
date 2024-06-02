@@ -11,6 +11,7 @@ plugins {
 }
 
 subprojects {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
 
     if (name != "static-analysis-plugins") {
         apply(plugin = "org.jetbrains.dokka")
