@@ -19,6 +19,15 @@ jobs:
       - name: Generate kover coverage report
         run: ./gradlew koverXmlReport
 
+      - name: List contents of the report directory
+        run: ls -la ${{ github.workspace }}/build/reports/kover
+
+      - name: Add delay to ensure file availability
+        run: sleep 10
+
+      - name: Print report file contents
+        run: cat ${{ github.workspace }}/build/reports/kover/report.xml
+
       - name: Add coverage report to PR
         id: kover
         uses: mi-kas/kover-report@v1
