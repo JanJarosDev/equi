@@ -34,7 +34,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
+
 
 
 dependencies {
@@ -44,4 +49,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    testImplementation(libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.kotlin.test.junit5)
 }
