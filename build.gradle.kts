@@ -45,6 +45,10 @@ subprojects {
     }
 }
 
+dependencies {
+    kover(project(":app"))
+}
+
 kover {
     reports {
         filters {
