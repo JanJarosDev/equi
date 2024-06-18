@@ -20,5 +20,4 @@ class Testujeme : Activity() {
     fun test(x: Boolean) : Boolean{
       return false
     }
-
 }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 8.4.0-alpha13" type="baseline" client="gradle" dependencies="false" name="AGP (8.4.0-alpha13)" variant="all" version="8.4.0-alpha13">
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.application than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.tools.build:gradle than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.tools.build:gradle than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of com.android.tools.build:gradle than 8.4.0-alpha13 is available: 8.4.1"
+        errorLine1="agp = &quot;8.4.0-alpha13&quot;"
+        errorLine2="      ~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/Development/Android/PORTFOLIO_DELTA/gradle/libs.versions.toml"
+            line="2"
+            column="7"/>
+    </issue>
+
+</issues>

@@ -43,8 +43,13 @@ jobs:
           arguments: |
             build
             mergeLintSarif
-            mergeDetektSarif
-            mergeSarif
+            mergeDetektSarif            
+            --continue
+
+      - uses: gradle/gradle-build-action@v2
+        with:
+          arguments: |
+            mergeSarif                        
             --continue
 
       - name: Initialize CodeQL
