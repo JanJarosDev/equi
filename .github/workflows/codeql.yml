@@ -44,6 +44,7 @@ jobs:
             build
             mergeLintSarif
             mergeDetektSarif
+            mergeSarif
             --continue
 
       - name: Initialize CodeQL

@@ -12,7 +12,6 @@ plugins {
 }
 
 subprojects {
-
     if (name != "static-analysis-plugins") {
         apply(plugin = "org.jetbrains.dokka")
 
@@ -45,6 +44,12 @@ subprojects {
             jvmTarget = "1.8"
         }
     }
+}
+
+rootProject.tasks.register("mergeSarif", ReportMergeTask::class.java) {
+    group = JavaBasePlugin.VERIFICATION_GROUP
+    output.set(rootProject.layout.buildDirectory.file("final.sarif"))
+    input = rootProject.layout.buildDirectory.dir("sarifs/").get().asFileTree
 }
 
 kover {

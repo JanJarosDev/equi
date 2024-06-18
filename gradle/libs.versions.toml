@@ -11,7 +11,7 @@ material = "1.12.0"
 detekt = "1.23.6"
 kover = "0.8.0"
 collectSarifVersion = "1.0.0"
-detectComposeVersion = "0.0.20"
+detectComposeVersion = "0.0.26"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -22,6 +22,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp" }
+detekt-compose = { module = "com.twitter.compose.rules:detekt", version.ref = "detectComposeVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -30,4 +31,4 @@ jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 collect-sarif = { id = "collect-sarif", version.ref = "collectSarifVersion" }
-detekt-compose = { id = "com.twitter.compose.rules:detekt", version.ref = "detectComposeVersion" }
+merge-sarif = { id = "merge-sarif", version.ref = "collectSarifVersion" }

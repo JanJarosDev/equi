@@ -5,18 +5,18 @@ import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.SkipWhenEmpty
 import org.gradle.api.tasks.TaskAction
+import java.io.File
 
 abstract class SarifMergeTask : AbstractExecTask<SarifMergeTask>(SarifMergeTask::class.java) {
 
     @InputFiles
     @SkipWhenEmpty
-    val lintSarifFiles: ConfigurableFileCollection = project.objects.fileCollection()
+    var lintSarifFiles: List<File> = emptyList()
 
     @OutputFile
     val mergedSarifFile: RegularFileProperty = project.objects.fileProperty()
 
     init {
-        mergedSarifFile.set(project.layout.buildDirectory.file("lint-merged.sarif"))
         executable = "npx"
     }
 
@@ -32,6 +32,8 @@ abstract class SarifMergeTask : AbstractExecTask<SarifMergeTask>(SarifMergeTask:
                 "--output-file",
                 mergedSarifFile.get().asFile.absolutePath,
             )
+        val toRun = staticArguments + lintSarifFiles.map { it.absolutePath }
+        println(toRun)
 
         args(staticArguments + lintSarifFiles.map { it.absolutePath })
 

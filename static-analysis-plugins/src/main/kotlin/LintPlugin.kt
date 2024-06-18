@@ -25,9 +25,10 @@ class LintPlugin : Plugin<Project> {
             }
         }
 
-        val rootProject = target.rootProject
-        rootProject.plugins.withId("collect-sarif") {
-            rootProject.tasks.named(
+        val buildDir = target.rootProject.layout.buildDirectory
+
+        target.plugins.withId("collect-sarif") {
+            target.tasks.named(
                 CollectSarifPlugin.MERGE_LINT_TASK_NAME,
                 ReportMergeTask::class.java,
             ) {
@@ -37,6 +38,9 @@ class LintPlugin : Plugin<Project> {
                         .named("lintReportDebug", AndroidLintTask::class.java)
                         .flatMap { it.sarifReportOutputFile }
                 )
+                output.set(buildDir.file("sarifs/lint-${target.name}.sarif").also {
+                    println(it.orNull?.asFile?.absolutePath)
+                })
             }
         }
     }
