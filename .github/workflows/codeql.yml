@@ -61,14 +61,7 @@ jobs:
       - uses: github/codeql-action/upload-sarif@v2
         if: success() || failure()
         with:
-          sarif_file: build/lint-merged.sarif
-          category: lint
-
-      - uses: github/codeql-action/upload-sarif@v2
-        if: success() || failure()
-        with:
-          sarif_file: build/detekt-merged.sarif
-          category: detekt
+          sarif_file: build/sarifs/final.sarif
 
       - if: matrix.build-mode == 'manual'
         shell: bash
