@@ -59,14 +59,20 @@ class Rebalancer {
         investments.forEach {
             if (it.currentValue >= it.targetValue!!) {
                 totalExcessAmount += it.investedAmount!!
-                logger.info("No excess from ${it.ticker}, adding investedAmount=${it.investedAmount}, new totalExcessAmount=$totalExcessAmount")
+                logger.info(
+                    "No excess from ${it.ticker}, adding investedAmount=${it.investedAmount}, " +
+                            "new totalExcessAmount=$totalExcessAmount"
+                )
                 it.investedAmount = 0.0
             } else {
                 val combinedValue = it.investedAmount!! + it.currentValue
                 if (combinedValue > it.targetValue!!) {
                     val excess = combinedValue - it.targetValue!!
                     totalExcessAmount += excess
-                    logger.info("Excess from ${it.ticker}: $excess, new investedAmount=${it.investedAmount}")
+                    logger.info(
+                        "Excess from ${it.ticker}: $excess, " +
+                                "new investedAmount=${it.investedAmount}"
+                    )
                     it.investedAmount = it.investedAmount!! - excess
                 }
             }
@@ -81,7 +87,10 @@ class Rebalancer {
                 val movingAmount = (totalExcessAmount / weightLeft) * it.weight
                 it.investedAmount = it.investedAmount!! + movingAmount
                 totalExcessAmount -= movingAmount
-                logger.info("Investment ${it.ticker}: Adjusted investedAmount=${it.investedAmount}, remaining totalExcessAmount=$totalExcessAmount")
+                logger.info(
+                    "Investment ${it.ticker}: Adjusted investedAmount=${it.investedAmount}, " +
+                            "remaining totalExcessAmount=$totalExcessAmount"
+                )
             }
         }
 
