@@ -12,6 +12,7 @@ plugins {
 }
 
 subprojects {
+    apply(plugin = "org.jetbrains.kotlinx.kover")
     if (name != "static-analysis-plugins") {
         apply(plugin = "org.jetbrains.dokka")
 
@@ -44,6 +45,11 @@ subprojects {
             jvmTarget = "1.8"
         }
     }
+}
+
+
+dependencies {
+    kover(project(":app"))
 }
 
 rootProject.tasks.register("mergeSarif", ReportMergeTask::class.java) {
