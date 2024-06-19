@@ -35,13 +35,18 @@ class DetektPlugin : Plugin<Project> {
                 reports.sarif.required.set(true)
             }
 
-            rootProject.plugins.withId("collect-sarif") {
-                rootProject.tasks.named(
+            val buildDir = rootProject.layout.buildDirectory
+
+            target.plugins.withId("collect-sarif") {
+                target.tasks.named(
                     CollectSarifPlugin.MERGE_DETEKT_TASK_NAME,
                     ReportMergeTask::class.java,
                 ) {
-                    input.from(detektTask.map { it.sarifReportFile }.orNull)
                     mustRunAfter(detektTask)
+                    input.from(detektTask.map { it.sarifReportFile }.orNull)
+                    output.set(buildDir.file("sarifs/detekt-${target.name}.sarif").also {
+                        println(it.orNull?.asFile?.absolutePath)
+                    })
                 }
             }
         }
