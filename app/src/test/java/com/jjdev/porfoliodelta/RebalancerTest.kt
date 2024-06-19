@@ -110,7 +110,7 @@ class RebalancerTest {
 
         val result = rebalancer.rebalance(150.0, investments)
 
-        assertEquals(0.0, result[0].investedAmount!!)
+        assertEquals(0.0, result[0].investedAmount!!, 0.01)
         assertTrue(result[0].targetValue!! == 380.0)
 
         assertTrue(result[1].investedAmount!! == 85.0)
@@ -120,7 +120,7 @@ class RebalancerTest {
         assertTrue(result[2].targetValue!! == 285.0)
 
         val totalFutureValue = investments.sumOf { it.currentValue } + 150.0
-        assertEquals(totalFutureValue, result.sumOf { it.targetValue!! })
+        assertEquals(totalFutureValue, result.sumOf { it.targetValue!! }, 0.01)
     }
 
 }
