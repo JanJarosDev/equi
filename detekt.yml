@@ -1,0 +1,7 @@
+build:
+  maxIssues: 10000
+
+config:
+  validation: false
+  warningsAsErrors: false
+  excludes: ''

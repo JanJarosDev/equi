@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0-alpha04"
+agp = "8.6.0-alpha06"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -9,8 +9,9 @@ appcompat = "1.7.0"
 dokka = "1.9.20"
 material = "1.12.0"
 detekt = "1.23.6"
-kover = "0.8.0"
+kover = "0.8.1"
 collectSarifVersion = "1.0.0"
+detectComposeVersion = "0.0.26"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,6 +25,7 @@ plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agp
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
+detekt-compose = { module = "com.twitter.compose.rules:detekt", version.ref = "detectComposeVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -32,3 +34,4 @@ jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 gitlab-detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 collect-sarif = { id = "collect-sarif", version.ref = "collectSarifVersion" }
+merge-sarif = { id = "merge-sarif", version.ref = "collectSarifVersion" }

@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -12,7 +13,6 @@ plugins {
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlinx.kover")
-
     if (name != "static-analysis-plugins") {
         apply(plugin = "org.jetbrains.dokka")
 
@@ -26,6 +26,7 @@ subprojects {
     }
 
     apply(plugin = "io.gitlab.arturbosch.detekt")
+    apply(plugin = "collect-sarif")
 
     plugins.withId("io.gitlab.arturbosch.detekt") {
         extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
@@ -46,8 +47,15 @@ subprojects {
     }
 }
 
+
 dependencies {
     kover(project(":app"))
+}
+
+rootProject.tasks.register("mergeSarif", ReportMergeTask::class.java) {
+    group = JavaBasePlugin.VERIFICATION_GROUP
+    output.set(rootProject.layout.buildDirectory.file("final.sarif"))
+    input = rootProject.layout.buildDirectory.dir("sarifs/").get().asFileTree
 }
 
 kover {
