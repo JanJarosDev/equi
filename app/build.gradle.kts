@@ -39,15 +39,14 @@ android {
 
     tasks.withType<Test> {
         useJUnitPlatform()
-        
+    }
+
     lint {
         baseline = file("lint-baseline.xml")
         abortOnError = false
 
     }
 }
-
-
 
 dependencies {
     implementation(libs.androidx.core.ktx)
