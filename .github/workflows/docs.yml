@@ -7,6 +7,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,3 +29,4 @@ jobs:
         with:
           BRANCH: gh-pages
           FOLDER: build/dokka/htmlMultiModule
+          GITHUB_TOKEN: ${{ secrets.MY_DOKKA_TOKEN }}
