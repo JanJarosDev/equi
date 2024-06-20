@@ -19,10 +19,10 @@ jobs:
           distribution: 'zulu'
 
       - name: Build documentation
-        run: ./gradlew dokkaHtml
+        run: ./gradlew dokkaHtmlMultiModule
 
       - name: Publish documentation
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           BRANCH: gh-pages
-          FOLDER: build/dokka/html
+          FOLDER: build/dokka/htmlMultiModule

@@ -1,32 +1,26 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
+import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
-    alias(libs.plugins.jetbrains.dokka) apply false
-    alias(libs.plugins.gitlab.detekt) apply false
+    alias(libs.plugins.jetbrains.dokka) apply true
+    alias(libs.plugins.gitlab.detekt) apply true
     alias(libs.plugins.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
 }
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlinx.kover")
-    if (name != "static-analysis-plugins") {
-        apply(plugin = "org.jetbrains.dokka")
-
-        plugins.withId("org.jetbrains.dokka") {
-            tasks.register<Jar>("dokkaJar") {
-                from(tasks.named("dokkaHtml"))
-                dependsOn(tasks.named("dokkaHtml"))
-                archiveClassifier.set("javadoc")
-            }
-        }
-    }
-
+    apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "collect-sarif")
+
+    tasks.withType<DokkaTaskPartial>().configureEach {
+        outputDirectory.set(layout.buildDirectory.dir("docs/partial"))
+    }
 
     plugins.withId("io.gitlab.arturbosch.detekt") {
         extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
@@ -46,7 +40,6 @@ subprojects {
         }
     }
 }
-
 
 dependencies {
     kover(project(":app"))
