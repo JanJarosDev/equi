@@ -19,13 +19,6 @@ jobs:
       - name: Generate kover coverage report
         run: ./gradlew koverXmlReport
 
-      # Debug step to check if the token is set
-      - name: Debug token
-        run: echo "Token is set"
-
-      - name: Print environment variables
-        run: env
-
       - name: Add coverage report to PR
         id: kover
         uses: mi-kas/kover-report@v1
