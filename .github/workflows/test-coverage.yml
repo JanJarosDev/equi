@@ -3,6 +3,10 @@ name: Measure coverage
 on:
   pull_request:
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   build:
     name: Test Coverage
