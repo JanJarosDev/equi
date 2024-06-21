@@ -3,3 +3,4 @@ $dokka.linkExtension:html
 
 module:app
 com.jjdev.porfoliodelta
+com.jjdev.porfoliodelta.ui.theme
