@@ -57,7 +57,7 @@ kover {
     reports {
         filters {
             excludes {
-                //TODO exclude when files are ready
+                classes("com.jjdev.porfoliodelta.ui.theme.*")
             }
         }
     }
