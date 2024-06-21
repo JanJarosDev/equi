@@ -1,3 +1,4 @@
+@file:Suppress("Unused")
 package com.jjdev.porfoliodelta.ui.theme
 
 import android.app.Activity
@@ -261,7 +262,7 @@ val unspecified_scheme = ColorFamily(
 fun PortfolioDeltaTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
-    content: @Composable() () -> Unit
+    content: @Composable () -> Unit
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
