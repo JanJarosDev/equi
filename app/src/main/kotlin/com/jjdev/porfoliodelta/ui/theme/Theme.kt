@@ -1,4 +1,4 @@
-@file:Suppress("Unused")
+@file:Suppress("UnusedPrivateProperty")
 package com.jjdev.porfoliodelta.ui.theme
 
 import android.app.Activity
