@@ -2,7 +2,7 @@
 agp = "8.6.0-alpha07"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
-junit-jupiter ="5.10.1"
+junit-jupiter = "5.10.1"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.7.0"
@@ -12,9 +12,8 @@ detekt = "1.23.6"
 kover = "0.8.1"
 collectSarifVersion = "1.0.0"
 detectComposeVersion = "0.0.26"
-uiGraphicsAndroid = "1.6.8"
-foundationAndroid = "1.6.8"
 material3Android = "1.2.1"
+compose = "2024.06.00"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -28,10 +27,16 @@ junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", v
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit-jupiter" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlin" }
 detekt-compose = { module = "com.twitter.compose.rules:detekt", version.ref = "detectComposeVersion" }
-androidx-ui-graphics-android = { group = "androidx.compose.ui", name = "ui-graphics-android", version.ref = "uiGraphicsAndroid" }
-androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroid" }
-androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
 
+# Compose
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
+compose-ui = { module = "androidx.compose.ui:ui" }
+compose-material = { module = "androidx.compose.material:material" }
+compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+compose-runtime = { module = "androidx.compose.runtime:runtime" }
+compose-activity = { module = "androidx.activity:activity-compose" }
+androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

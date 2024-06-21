@@ -57,12 +57,20 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.ui.graphics.android)
-    implementation(libs.androidx.foundation.android)
     implementation(libs.androidx.material3.android)
+
+    //Compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.compose.ui)
+    implementation(libs.compose.material)
+    implementation(libs.compose.tooling.preview)
+    implementation(libs.compose.runtime)
+    implementation(libs.compose.activity)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.junit.jupiter.api)
+    debugImplementation(libs.androidx.ui.tooling)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlin.test.junit5)
 }
