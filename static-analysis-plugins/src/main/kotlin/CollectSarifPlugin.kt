@@ -9,11 +9,11 @@ import org.gradle.kotlin.dsl.withType
 class CollectSarifPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
-        val lintMergeTask by target.tasks.register(MERGE_LINT_TASK_NAME, ReportMergeTask::class.java) {
+        target.tasks.register(MERGE_LINT_TASK_NAME, ReportMergeTask::class.java) {
             group = JavaBasePlugin.VERIFICATION_GROUP
             output.set(project.layout.buildDirectory.file("lint-merged.sarif"))
         }
-        val detektMergeTask by target.tasks.register(MERGE_DETEKT_TASK_NAME, ReportMergeTask::class.java) {
+        target.tasks.register(MERGE_DETEKT_TASK_NAME, ReportMergeTask::class.java) {
             group = JavaBasePlugin.VERIFICATION_GROUP
             output.set(project.layout.buildDirectory.file("detekt-merged.sarif"))
         }
