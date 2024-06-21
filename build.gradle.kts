@@ -10,6 +10,7 @@ plugins {
     alias(libs.plugins.gitlab.detekt) apply true
     alias(libs.plugins.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
+    alias(libs.plugins.compose.compiler) apply false
 }
 
 subprojects {
@@ -17,6 +18,7 @@ subprojects {
     apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "io.gitlab.arturbosch.detekt")
     apply(plugin = "collect-sarif")
+    apply(plugin = "org.jetbrains.kotlin.plugin.compose")
 
     tasks.withType<DokkaTaskPartial>().configureEach {
         outputDirectory.set(layout.buildDirectory.dir("docs/partial"))
