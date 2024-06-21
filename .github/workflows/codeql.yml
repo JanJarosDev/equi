@@ -9,8 +9,8 @@ on:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
-    timeout-minutes: ${{ (matrix.language == 'swift' && 120) || 360 }}
+    runs-on: ${{ matrix.language == 'swift' && 'macos-latest' || 'ubuntu-latest' }}
+    timeout-minutes: ${{ matrix.language == 'swift' && 120 || 360 }}
     permissions:
       security-events: write
       packages: read
@@ -43,26 +43,19 @@ jobs:
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v3
 
-      - name: Build with Gradle
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: |
-            build
-            mergeLintSarif
-            mergeDetektSarif            
-            --continue
+
+      - name: Generate Lint and Detekt SARIFs
+        run: ./gradlew build mergeLintSarif mergeDetektSarif --continue
 
       - name: Merge SARIF Files
-        uses: gradle/actions/setup-gradle@v3
-        with:
-          arguments: |
-            mergeSarif                        
-            --continue
+        run: ./gradlew mergeSarif --continue
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
         with:
-          category: "/language:${{matrix.language}}"
+          category: "/language:${{ matrix.language }}"
 
       - name: Upload Merged SARIF
         uses: github/codeql-action/upload-sarif@v3
