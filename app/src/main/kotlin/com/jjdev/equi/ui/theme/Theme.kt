@@ -1,5 +1,5 @@
 @file:Suppress("UnusedPrivateProperty")
-package com.jjdev.porfoliodelta.ui.theme
+package com.jjdev.equi.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -259,7 +259,7 @@ val unspecified_scheme = ColorFamily(
 )
 
 @Composable
-fun PortfolioDeltaTheme(
+fun EquiTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

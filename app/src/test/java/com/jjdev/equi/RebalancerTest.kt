@@ -1,4 +1,4 @@
-package com.jjdev.porfoliodelta
+package com.jjdev.equi
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
