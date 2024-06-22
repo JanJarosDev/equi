@@ -12,6 +12,9 @@ pluginManagement {
     }
     includeBuild("static-analysis-plugins")
 }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.5.0"
+}
 
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -22,5 +25,5 @@ dependencyResolutionManagement {
 }
 
 gradle.startParameter.excludedTaskNames.addAll(listOf(":static-analysis-plugins:testClasses"))
-rootProject.name = "Porfolio Delta"
+rootProject.name = "Equi"
 include(":app")

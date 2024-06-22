@@ -1,5 +1,5 @@
 @file:Suppress("MagicNumber")
-package com.jjdev.porfoliodelta.ui.theme
+package com.jjdev.equi.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

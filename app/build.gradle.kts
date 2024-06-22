@@ -1,3 +1,4 @@
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -7,15 +8,15 @@ plugins {
 }
 
 android {
-    namespace = "com.jjdev.porfoliodelta"
+    namespace = "com.jjdev.equi"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.jjdev.porfoliodelta"
+        applicationId = "com.jjdev.equi"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = VersioningUtils.generateVersionCode()
+        versionName = VersioningUtils.getVersionFromTag(project)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

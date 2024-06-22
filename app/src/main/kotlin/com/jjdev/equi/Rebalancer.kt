@@ -1,4 +1,4 @@
-package com.jjdev.porfoliodelta
+package com.jjdev.equi
 
 import java.util.logging.Logger
 
