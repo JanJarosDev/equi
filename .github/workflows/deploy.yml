@@ -1,0 +1,70 @@
+name: Deploy Equi
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+    paths:
+      - 'release/**'
+
+jobs:
+  build_signed_aab:
+    name: Build Signed AAB
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup JDK 21 Zulu
+        uses: actions/setup-java@v3
+        with:
+          distribution: zulu
+          java-version: 21
+
+      - name: Setup Gradle Cache
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-home-cache-cleanup: true
+
+      - name: Build App Bundle
+        run: ./gradlew bundleRelease
+
+      - name: Sign AAB
+        id: sign
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          signingKeyBase64: ${{ secrets.KEYSTORE }}
+          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+
+      - name: Upload App Bundle as Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app-bundle
+          path: app/build/outputs/bundle/release/app-release.aab
+
+      - name: Print Job Status
+        run: echo Build status report=${{ job.status }}
+
+  deploy_to_playstore:
+    name: Deploy to Playstore
+    needs: build_signed_aab
+    runs-on: ubuntu-latest
+    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
+    steps:
+      - name: Download App Bundle from Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: app-bundle
+
+      - name: Publish to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          #TODO Fix package name after rebrand
+          packageName: XXX
+          releaseFiles: ${{ github.workspace }}/app-release.aab
+          track: production
