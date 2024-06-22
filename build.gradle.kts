@@ -55,6 +55,11 @@ rootProject.tasks.register("mergeSarif", ReportMergeTask::class.java) {
 
 kover {
     reports {
+        verify {
+            rule {
+                minBound(100)
+            }
+        }
         filters {
             excludes {
                 classes("com.jjdev.equi.ui.theme.*")
