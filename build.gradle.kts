@@ -57,7 +57,7 @@ kover {
     reports {
         filters {
             excludes {
-                classes("com.jjdev.porfoliodelta.ui.theme.*")
+                classes("com.jjdev.equi.ui.theme.*")
             }
         }
     }

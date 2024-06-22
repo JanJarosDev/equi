@@ -1,4 +1,4 @@
-package com.jjdev.porfoliodelta.ui.theme
+package com.jjdev.equi.ui.theme
 
 import androidx.compose.material3.Typography
 
