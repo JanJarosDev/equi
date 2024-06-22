@@ -64,7 +64,6 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
-          #TODO Fix package name after rebrand
-          packageName: XXX
+          packageName: com.jjdev.equi
           releaseFiles: ${{ github.workspace }}/app-release.aab
           track: production
