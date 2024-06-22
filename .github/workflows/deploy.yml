@@ -12,7 +12,7 @@ jobs:
   build_signed_aab:
     name: Build Signed AAB
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
+  #  if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -54,7 +54,7 @@ jobs:
     name: Deploy to Playstore
     needs: build_signed_aab
     runs-on: ubuntu-latest
-    if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
+  #  if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
     steps:
       - name: Download App Bundle from Artifact
         uses: actions/download-artifact@v2
