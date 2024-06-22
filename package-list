@@ -2,5 +2,5 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 
 module:app
-com.jjdev.porfoliodelta
-com.jjdev.porfoliodelta.ui.theme
+com.jjdev.equi
+com.jjdev.equi.ui.theme
