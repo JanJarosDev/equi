@@ -15,23 +15,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.jjdev.porfoliodelta.ui.theme.PortfolioDeltaTypography
+import com.jjdev.porfoliodelta.ui.theme.dimens
 
 @Composable
 fun DetailItemComponent(
     data: Pair<String, Int>,
-    height: Dp = 45.dp,
-    color: Color
+    color: Color,
 ) {
     Surface(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.surface)
-            .padding(vertical = 10.dp, horizontal = 40.dp),
-        color = Color.Transparent
+            .padding(
+                vertical = MaterialTheme.dimens.small,
+                horizontal = MaterialTheme.dimens.large,
+            ),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -41,24 +40,24 @@ fun DetailItemComponent(
                 modifier = Modifier
                     .background(
                         color = color,
-                        shape = RoundedCornerShape(10.dp)
+                        shape = RoundedCornerShape(MaterialTheme.dimens.cornerRadius)
                     )
-                    .size(height)
+                    .size(MaterialTheme.dimens.extraLarge)
             )
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = MaterialTheme.dimens.small)
+            ) {
                 Text(
-                    modifier = Modifier.padding(start = 15.dp),
                     text = data.first,
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 22.sp,
-                    color = MaterialTheme.colorScheme.onSurface
+                    style = PortfolioDeltaTypography.labelLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
                 Text(
-                    modifier = Modifier.padding(start = 15.dp),
                     text = data.second.toString(),
-                    fontWeight = FontWeight.Medium,
-                    fontSize = 22.sp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                    style = PortfolioDeltaTypography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }

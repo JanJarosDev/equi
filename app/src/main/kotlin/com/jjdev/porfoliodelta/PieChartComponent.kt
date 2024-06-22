@@ -16,21 +16,25 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.jjdev.porfoliodelta.ui.theme.dimens
 
 @Composable
 fun PieChartComponent(
     data: Map<String, Int>,
-    radiusOuter: Dp = 280.dp,
-    chartBarWidth: Dp = 35.dp,
 ) {
+    val outerRadius = 280.dp
+    val chartBarWidth: Dp = 35.dp
 
+    //TODO Move to VM
     val totalSum = data.values.sum()
     val floatValue = mutableListOf<Float>()
 
+    //TODO Move to VM
     data.values.forEachIndexed { index, values ->
         floatValue.add(index, 360 * values.toFloat() / totalSum.toFloat())
     }
 
+    //TODO Move to VM
     var lastValue = 0f
 
     Column(
@@ -44,16 +48,19 @@ fun PieChartComponent(
         ) {
             Canvas(
                 modifier = Modifier
-                    .size(radiusOuter)
-                    .padding(25.dp)
+                    .size(outerRadius)
+                    .padding(MaterialTheme.dimens.large)
             ) {
                 floatValue.forEachIndexed { index, value ->
                     drawArc(
                         color = PieChartColors.entries[index].color,
-                        lastValue,
-                        value,
+                        startAngle = lastValue,
+                        sweepAngle = value,
                         useCenter = false,
-                        style = Stroke(chartBarWidth.toPx(), cap = StrokeCap.Butt)
+                        style = Stroke(
+                            width = chartBarWidth.toPx(),
+                            cap = StrokeCap.Butt
+                        )
                     )
                     lastValue += value
                 }
