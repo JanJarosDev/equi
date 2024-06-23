@@ -35,8 +35,8 @@ compose-material = { module = "androidx.compose.material:material" }
 compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 compose-runtime = { module = "androidx.compose.runtime:runtime" }
 compose-activity = { module = "androidx.activity:activity-compose" }
-androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3Android" }
-androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-material3-android = { module = "androidx.compose.material3:material3"}
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
