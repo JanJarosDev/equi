@@ -67,6 +67,9 @@ dependencies {
     implementation(libs.compose.runtime)
     implementation(libs.compose.activity)
 
+    //Logging
+    implementation(libs.timber)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.junit.jupiter.api)
