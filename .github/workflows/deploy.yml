@@ -14,7 +14,7 @@ jobs:
     if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup JDK 21 Zulu
         uses: actions/setup-java@v4
@@ -41,7 +41,7 @@ jobs:
           keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Upload App Bundle as Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: app-bundle
           path: app/build/outputs/bundle/release/app-release.aab
