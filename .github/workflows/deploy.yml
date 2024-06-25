@@ -56,7 +56,7 @@ jobs:
     if: ${{ github.event.pull_request.merged == true && github.event.pull_request.head.ref == 'release-please--branches--main' }}
     steps:
       - name: Download App Bundle from Artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: app-bundle
 
