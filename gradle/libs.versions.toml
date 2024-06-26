@@ -42,3 +42,4 @@ jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "k
 collect-sarif = { id = "collect-sarif", version.ref = "collectSarifVersion" }
 merge-sarif = { id = "merge-sarif", version.ref = "collectSarifVersion" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }

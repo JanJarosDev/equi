@@ -5,6 +5,7 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
     alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.jetbrains.dokka) apply true
     alias(libs.plugins.gitlab.detekt) apply true
@@ -45,6 +46,7 @@ subprojects {
 
 dependencies {
     kover(project(":app"))
+    kover(project(":core"))
 }
 
 rootProject.tasks.register("mergeSarif", ReportMergeTask::class.java) {
