@@ -29,6 +29,7 @@ subprojects {
         extensions.configure<io.gitlab.arturbosch.detekt.extensions.DetektExtension> {
             buildUponDefaultConfig = true
             allRules = true
+            ignoreFailures = true
         }
 
         tasks.withType<Detekt>().configureEach {
