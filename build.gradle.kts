@@ -59,6 +59,7 @@ subprojects {
                 lint {
                     baseline = file("$rootDir/lint-baseline.xml")
                     abortOnError = false
+                    sarifReport = true
                 }
             }
         } else if (plugins.hasPlugin("com.android.library")) {
@@ -66,6 +67,7 @@ subprojects {
                 lint {
                     baseline = file("$rootDir/lint-baseline.xml")
                     abortOnError = false
+                    sarifReport = true
                 }
             }
         }

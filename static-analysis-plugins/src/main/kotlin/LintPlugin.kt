@@ -16,15 +16,6 @@ class LintPlugin : Plugin<Project> {
     }
 
     private fun collectLintSarif(target: Project) {
-        target.extensions.configure<CommonExtension<*, *, *, *, *, *>>("android") {
-            lint {
-                sarifReport = true
-                baseline = target.file("lint-baseline.xml")
-                warningsAsErrors = true
-                disable += listOf("ObsoleteLintCustomCheck")
-            }
-        }
-
         val buildDir = target.rootProject.layout.buildDirectory
 
         target.plugins.withId("collect-sarif") {
