@@ -7,12 +7,11 @@ plugins {
 
 android {
     namespace = "com.jjdev.equi"
-    compileSdk = 34
+    compileSdk = COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId = "com.jjdev.equi"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = MIN_SDK_VERSION
         versionCode = VersioningUtils.generateVersionCode()
         versionName = VersioningUtils.getVersionFromTag(project)
 
@@ -38,7 +37,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JVM_TARGET_VERSION
     }
 }
 

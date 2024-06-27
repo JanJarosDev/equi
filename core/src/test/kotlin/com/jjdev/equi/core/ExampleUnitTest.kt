@@ -1,4 +1,4 @@
-package com.jjdev.myapplication
+package com.jjdev.equi.core
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test

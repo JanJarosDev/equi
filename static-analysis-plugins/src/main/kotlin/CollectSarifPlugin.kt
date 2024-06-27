@@ -1,10 +1,7 @@
-import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.report.ReportMergeTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.plugins.JavaBasePlugin
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.withType
 
 class CollectSarifPlugin : Plugin<Project> {
 

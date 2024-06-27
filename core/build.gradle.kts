@@ -1,13 +1,17 @@
 plugins {
     alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.kotlin.android)
 }
 
 android {
     namespace = "com.jjdev.equi.core"
-    compileSdk = 34
+    compileSdk = COMPILE_SDK_VERSION
 
     defaultConfig {
-        minSdk = 24
+        minSdk = MIN_SDK_VERSION
+    }
+    kotlinOptions {
+        jvmTarget = JVM_TARGET_VERSION
     }
 }
 
