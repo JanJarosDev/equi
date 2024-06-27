@@ -35,11 +35,11 @@ subprojects {
             reports {
                 sarif.required.set(true)
             }
-            jvmTarget = "1.8"
+            jvmTarget = JVM_TARGET_VERSION
         }
 
         tasks.withType<DetektCreateBaselineTask>().configureEach {
-            jvmTarget = "1.8"
+            jvmTarget = JVM_TARGET_VERSION
         }
     }
 
