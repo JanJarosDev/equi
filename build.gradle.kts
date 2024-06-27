@@ -18,7 +18,6 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlinx.kover")
     apply(plugin = "org.jetbrains.dokka")
     apply(plugin = "io.gitlab.arturbosch.detekt")
-    apply(plugin = "collect-sarif")
     apply(plugin = "org.jetbrains.kotlin.plugin.compose")
 
     tasks.withType<DokkaTaskPartial>().configureEach {
@@ -42,6 +41,12 @@ subprojects {
         tasks.withType<DetektCreateBaselineTask>().configureEach {
             jvmTarget = "1.8"
         }
+    }
+
+    if (project.name != "static-analysis-plugins") {
+        apply(plugin = "collect-sarif")
+        apply(plugin = "collect-sarif-detekt")
+        apply(plugin = "collect-sarif-lint")
     }
 }
 
