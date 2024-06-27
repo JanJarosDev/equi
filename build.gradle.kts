@@ -57,14 +57,14 @@ subprojects {
         if (plugins.hasPlugin("com.android.application")) {
             extensions.configure<com.android.build.gradle.internal.dsl.BaseAppModuleExtension> {
                 lint {
-                    baseline = file("lint-baseline.xml")
+                    baseline = file("$rootDir/lint-baseline.xml")
                     abortOnError = false
                 }
             }
         } else if (plugins.hasPlugin("com.android.library")) {
             extensions.configure<com.android.build.gradle.LibraryExtension> {
                 lint {
-                    baseline = file("lint-baseline.xml")
+                    baseline = file("$rootDir/lint-baseline.xml")
                     abortOnError = false
                 }
             }
