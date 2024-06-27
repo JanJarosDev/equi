@@ -24,10 +24,12 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-
+    implementation(libs.material)
+    implementation(libs.androidx.ui.graphics.android)
+    implementation(libs.androidx.foundation.android)
+    implementation(libs.androidx.material3.android)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlin.test.junit5)

@@ -43,7 +43,6 @@ android {
 }
 
 dependencies {
-    //TODO Remove when features exists
     implementation(project(":core"))
 
     implementation(libs.androidx.core.ktx)
