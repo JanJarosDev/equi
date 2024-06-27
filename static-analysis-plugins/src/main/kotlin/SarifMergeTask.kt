@@ -1,4 +1,3 @@
-import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.AbstractExecTask
 import org.gradle.api.tasks.InputFiles

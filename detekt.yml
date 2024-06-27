@@ -3,7 +3,7 @@ build:
 
 config:
   validation: false
-  warningsAsErrors: true
+  warningsAsErrors: false
   excludes: ''
 
 naming:

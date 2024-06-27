@@ -1,35 +1,14 @@
-
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.jetbrains.kotlinx.kover)
 }
 
 android {
-    namespace = "com.jjdev.equi"
+    namespace = "com.jjdev.equi.core"
     compileSdk = COMPILE_SDK_VERSION
 
     defaultConfig {
-        applicationId = "com.jjdev.equi"
         minSdk = MIN_SDK_VERSION
-        versionCode = VersioningUtils.generateVersionCode()
-        versionName = VersioningUtils.getVersionFromTag(project)
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
-    buildFeatures {
-        compose = true
     }
 
     compileOptions {
@@ -43,8 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

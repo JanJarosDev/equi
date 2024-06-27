@@ -27,3 +27,4 @@ dependencyResolutionManagement {
 gradle.startParameter.excludedTaskNames.addAll(listOf(":static-analysis-plugins:testClasses"))
 rootProject.name = "Equi"
 include(":app")
+include(":core")
