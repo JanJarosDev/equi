@@ -3,18 +3,15 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
-    id("collect-sarif-detekt")
-    id("collect-sarif-lint")
 }
 
 android {
     namespace = "com.jjdev.equi"
-    compileSdk = 34
+    compileSdk = COMPILE_SDK_VERSION
 
     defaultConfig {
         applicationId = "com.jjdev.equi"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = MIN_SDK_VERSION
         versionCode = VersioningUtils.generateVersionCode()
         versionName = VersioningUtils.getVersionFromTag(project)
 
@@ -36,24 +33,18 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
-    }
-
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
-
-    lint {
-        baseline = file("lint-baseline.xml")
-        abortOnError = false
+        jvmTarget = JVM_TARGET_VERSION
     }
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
