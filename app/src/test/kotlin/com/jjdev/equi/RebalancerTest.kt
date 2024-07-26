@@ -122,5 +122,4 @@ class RebalancerTest {
         val totalFutureValue = investments.sumOf { it.currentValue } + 150.0
         assertEquals(totalFutureValue, result.sumOf { it.targetValue!! }, 0.01)
     }
-
 }
