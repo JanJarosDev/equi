@@ -44,9 +44,11 @@ class DetektPlugin : Plugin<Project> {
                 ) {
                     mustRunAfter(detektTask)
                     input.from(detektTask.map { it.sarifReportFile }.orNull)
-                    output.set(buildDir.file("sarifs/detekt-${target.name}.sarif").also {
-                        println(it.orNull?.asFile?.absolutePath)
-                    })
+                    output.set(
+                        buildDir.file("sarifs/detekt-${target.name}.sarif").also {
+                            println(it.orNull?.asFile?.absolutePath)
+                        }
+                    )
                 }
             }
         }
@@ -64,5 +66,4 @@ class DetektPlugin : Plugin<Project> {
             )
         }
     }
-
 }

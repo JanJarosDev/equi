@@ -38,5 +38,4 @@ abstract class SarifMergeTask : AbstractExecTask<SarifMergeTask>(SarifMergeTask:
 
         super.exec()
     }
-
 }

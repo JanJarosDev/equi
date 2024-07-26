@@ -28,11 +28,12 @@ class LintPlugin : Plugin<Project> {
                         .named("lintReportDebug", AndroidLintTask::class.java)
                         .flatMap { it.sarifReportOutputFile }
                 )
-                output.set(buildDir.file("sarifs/lint-${target.name}.sarif").also {
-                    println(it.orNull?.asFile?.absolutePath)
-                })
+                output.set(
+                    buildDir.file("sarifs/lint-${target.name}.sarif").also {
+                        println(it.orNull?.asFile?.absolutePath)
+                    }
+                )
             }
         }
     }
-
 }
