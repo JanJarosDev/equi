@@ -95,6 +95,7 @@ kover {
         filters {
             excludes {
                 classes("com.jjdev.equi.ui.theme.*")
+                classes("com.jjdev.equi.core.base.*")
             }
         }
     }
