@@ -55,15 +55,6 @@ material = { group = "com.google.android.material", name = "material", version.r
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agpVersion" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektVersion" }
 
-# Compose
-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose" }
-compose-ui = { module = "androidx.compose.ui:ui" }
-compose-material = { module = "androidx.compose.material:material" }
-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-compose-runtime = { module = "androidx.compose.runtime:runtime" }
-compose-activity = { module = "androidx.activity:activity-compose" }
-androidx-material3-android = { module = "androidx.compose.material3:material3"}
-androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agpVersion" }
