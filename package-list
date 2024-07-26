@@ -4,3 +4,6 @@ $dokka.linkExtension:html
 module:app
 com.jjdev.equi
 com.jjdev.equi.ui.theme
+module:core
+com.jjdev.equi.core.base.domain
+com.jjdev.equi.core.base.presentation
