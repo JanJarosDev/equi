@@ -2,6 +2,14 @@ package com.jjdev.equi
 
 import java.util.logging.Logger
 
+data class Investment(
+    val ticker: String,
+    val weight: Double,
+    val currentValue: Double,
+    var investedAmount: Double? = null,
+    var targetValue: Double? = null,
+)
+
 class Rebalancer {
 
     private val logger = Logger.getLogger(Rebalancer::class.java.name)
@@ -31,8 +39,7 @@ class Rebalancer {
         while (excessAmount > 0.0) {
             logger.info("Excess amount to reallocate: $excessAmount")
             excessAmount = adjustInvestments(
-                adjustedInvestments.filter { it.investedAmount!! > 0 },
-                excessAmount
+                adjustedInvestments.filter { it.investedAmount!! > 0 }, excessAmount
             )
         }
 
@@ -51,8 +58,8 @@ class Rebalancer {
             if (it.currentValue >= it.targetValue!!) {
                 totalExcessAmount += it.investedAmount!!
                 logger.info(
-                    "No excess from ${it.ticker}, adding investedAmount=${it.investedAmount}, " +
-                            "new totalExcessAmount=$totalExcessAmount"
+                    "No excess from ${it.ticker}, adding investedAmount=${it.investedAmount}," +
+                        " new totalExcessAmount=$totalExcessAmount"
                 )
                 it.investedAmount = 0.0
             } else {
@@ -61,8 +68,7 @@ class Rebalancer {
                     val excess = combinedValue - it.targetValue!!
                     totalExcessAmount += excess
                     logger.info(
-                        "Excess from ${it.ticker}: $excess, " +
-                                "new investedAmount=${it.investedAmount}"
+                        "Excess from ${it.ticker}: $excess, " + "new investedAmount=${it.investedAmount}"
                     )
                     it.investedAmount = it.investedAmount!! - excess
                 }
@@ -79,8 +85,8 @@ class Rebalancer {
                 it.investedAmount = it.investedAmount!! + movingAmount
                 totalExcessAmount -= movingAmount
                 logger.info(
-                    "Investment ${it.ticker}: Adjusted investedAmount=${it.investedAmount}, " +
-                            "remaining totalExcessAmount=$totalExcessAmount"
+                    "Investment ${it.ticker}: Adjusted investedAmount=${it.investedAmount}," +
+                        " remaining totalExcessAmount=$totalExcessAmount"
                 )
             }
         }

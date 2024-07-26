@@ -3,9 +3,10 @@ import java.io.ByteArrayOutputStream
 
 object VersioningUtils {
     fun generateVersionCode(): Int {
-        return (System.currentTimeMillis() / 1000).toInt()
+        return (System.currentTimeMillis() / MILLIS).toInt()
     }
 
+    @Suppress("SwallowedException", "TooGenericExceptionCaught")
     fun getVersionFromTag(project: Project): String {
         return try {
             val stdout = ByteArrayOutputStream()

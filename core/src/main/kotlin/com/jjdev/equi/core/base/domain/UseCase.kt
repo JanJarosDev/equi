@@ -1,8 +1,8 @@
 package com.jjdev.equi.core.base.domain
 
-import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 abstract class UseCase<in Parameters, Success, BusinessRuleError>(private val dispatcher: CoroutineDispatcher) {
 
@@ -13,7 +13,7 @@ abstract class UseCase<in Parameters, Success, BusinessRuleError>(private val di
                 execute(parameters)
             }
         } catch (e: RuntimeException) {
-            Log.e("UseCase", "An error occurred while executing the use case", e)
+            Timber.e("An error occurred while executing the use case", e)
             Result.Error(e.mapToAppError())
         }
     }

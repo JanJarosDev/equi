@@ -23,7 +23,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-
 }
 
 dependencies {
@@ -38,4 +37,5 @@ dependencies {
     testImplementation(libs.junit.jupiter.api)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlin.test.junit5)
+    implementation(libs.timber)
 }
