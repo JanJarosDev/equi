@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EquiTheme {
                 Scaffold { contentPadding ->
-                    DashboardScreen(modifier = Modifier.padding(contentPadding))
+                    EquiNavigation(modifier = Modifier.padding(contentPadding))
                 }
             }
         }
