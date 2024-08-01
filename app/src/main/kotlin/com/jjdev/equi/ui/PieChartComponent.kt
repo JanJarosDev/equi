@@ -20,18 +20,18 @@ import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable
 fun PieChartComponent(
-    data: Map<String, Int>,
+    data: List<Triple<String, Int, Double>>,
 ) {
     val outerRadius = 280.dp
     val chartBarWidth: Dp = 35.dp
 
     //TODO Move to VM
-    val totalSum = data.values.sum()
+    val totalSum = data.sumOf { it.second }
     val floatValue = mutableListOf<Float>()
 
     //TODO Move to VM
-    data.values.forEachIndexed { index, values ->
-        floatValue.add(index, 360 * values.toFloat() / totalSum.toFloat())
+    data.forEachIndexed { index, values ->
+        floatValue.add(index, 360 * data[index].second.toFloat() / totalSum.toFloat())
     }
 
     //TODO Move to VM
@@ -73,6 +73,6 @@ fun PieChartComponent(
 @Composable
 fun PieChartComponentPreview() {
     PieChartComponent(
-        data = mapOf(Pair("EGU", 10), Pair("XXX", 10))
+        data = listOf(Triple("EGU", 10, 100.0), Triple("XXX", 10, 100.0)),
     )
 }

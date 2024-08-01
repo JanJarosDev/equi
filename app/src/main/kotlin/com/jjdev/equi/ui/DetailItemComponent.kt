@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,7 +22,7 @@ import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable
 fun DetailItemComponent(
-    data: Pair<String, Int>,
+    data: Triple<String, Int, Double>,
     color: Color,
 ) {
     Surface(
@@ -46,7 +47,6 @@ fun DetailItemComponent(
             )
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
                     .padding(start = MaterialTheme.dimens.small)
             ) {
                 Text(
@@ -60,6 +60,12 @@ fun DetailItemComponent(
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                text = "----> "+ data.third.toString(),
+                style = PortfolioDeltaTypography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }
@@ -68,7 +74,7 @@ fun DetailItemComponent(
 @Composable
 fun DetailItemComponentPreview() {
     DetailItemComponent(
-        data = Pair("EGU", 10),
+        data = Triple("EGU", 10, 100.0),
         color = PieChartColors.RED.color
     )
 }

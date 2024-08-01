@@ -1,13 +1,14 @@
 package com.jjdev.equi.dashboard.domain
 
-import com.jjdev.equi.dashboard.domain.model.Investment
 import com.jjdev.equi.core.base.domain.AppError
 import com.jjdev.equi.core.base.domain.Result
 import com.jjdev.equi.core.base.domain.UseCase
+import com.jjdev.equi.dashboard.domain.model.Investment
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
+import javax.inject.Inject
 
-class RebalanceUseCase :
+class RebalanceUseCase @Inject constructor() :
     UseCase<Pair<Double, List<Investment>>, List<Investment>, AppError?>(
         dispatcher = Dispatchers.Default
     ) {

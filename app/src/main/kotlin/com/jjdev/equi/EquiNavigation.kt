@@ -17,8 +17,10 @@ fun EquiNavigation(modifier: Modifier) {
         composable("dashboard") {
             val viewModel: DashboardViewModel = hiltViewModel()
             DashboardScreen(
-                viewModel.data.collectAsStateWithLifecycle().value,
-                modifier,
+                state = viewModel.state.collectAsStateWithLifecycle().value,
+                sendEvent = viewModel::sendEvent,
+                onRebalanceClick = viewModel::onRebalanceClick,
+                modifier = modifier,
             )
         }
     }

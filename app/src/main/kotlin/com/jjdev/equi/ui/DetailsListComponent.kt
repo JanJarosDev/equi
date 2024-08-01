@@ -9,16 +9,16 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun DetailsListComponent(
-    data: Map<String, Int>,
+    data: List<Triple<String, Int, Double>>,
     colors: List<Color>
 ) {
     //Todo lazycolumn
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
-        data.values.forEachIndexed { index, value ->
+        data.forEachIndexed { index, value ->
             DetailItemComponent(
-                data = Pair(data.keys.elementAt(index), value),
+                data = value,
                 color = colors[index]
             )
         }
@@ -29,7 +29,7 @@ fun DetailsListComponent(
 @Composable
 fun DetailsListComponentPreview() {
     DetailsListComponent(
-        data = mapOf(Pair("EGU", 10), Pair("XXX", 10)),
+        data = listOf(Triple("EGU", 10, 100.0), Triple("XXX", 10, 100.0)),
         colors = PieChartColors.entries.map { it.color }
     )
 }
