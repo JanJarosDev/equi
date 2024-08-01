@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class RebalancerTest {
+class RebalanceUseCaseTest {
 
-    private val rebalancer = Rebalancer()
+    private val rebalanceUseCase = RebalanceUseCase()
 
     @Test
     fun `rebalance should distribute investments equally when weights sum to 1`() {
@@ -16,7 +16,7 @@ class RebalancerTest {
             Investment("B", 0.5, 100.0)
         )
 
-        val result = rebalancer.rebalance(100.0, investments)
+        val result = rebalanceUseCase.rebalance(100.0, investments)
 
         assertEquals(50.0, result[0].investedAmount)
         assertEquals(150.0, result[0].targetValue)
@@ -31,7 +31,7 @@ class RebalancerTest {
             Investment("B", 0.8, 100.0)
         )
 
-        val result = rebalancer.rebalance(1000.0, investments)
+        val result = rebalanceUseCase.rebalance(1000.0, investments)
 
         assertEquals(60.0, result[0].investedAmount!!, 0.01)
         assertEquals(260.0, result[0].targetValue)
@@ -47,7 +47,7 @@ class RebalancerTest {
         )
 
         val exception = assertThrows<IllegalArgumentException> {
-            rebalancer.rebalance(100.0, investments)
+            rebalanceUseCase.rebalance(100.0, investments)
         }
         assertEquals("Weights must sum to 1.0", exception.message)
     }
@@ -60,7 +60,7 @@ class RebalancerTest {
             Investment("C", 0.5, 100.0)
         )
 
-        val result = rebalancer.rebalance(100.0, investments)
+        val result = rebalanceUseCase.rebalance(100.0, investments)
 
         assertEquals(50.0, result[0].investedAmount)
         assertEquals(200.0, result[0].targetValue)
@@ -77,7 +77,7 @@ class RebalancerTest {
             Investment("B", 0.5, 100.0)
         )
 
-        val result = rebalancer.rebalance(100.0, investments)
+        val result = rebalanceUseCase.rebalance(100.0, investments)
 
         assertEquals(50.0, result[0].investedAmount)
         assertEquals(150.0, result[0].targetValue)
@@ -92,7 +92,7 @@ class RebalancerTest {
             Investment("B", 0.5, 100.0)
         )
 
-        val result = rebalancer.rebalance(100.0, investments)
+        val result = rebalanceUseCase.rebalance(100.0, investments)
 
         assertEquals(0.0, result[0].investedAmount)
         assertEquals(200.0, result[0].targetValue)
@@ -108,7 +108,7 @@ class RebalancerTest {
             Investment("C", 0.3, 200.0),
         )
 
-        val result = rebalancer.rebalance(150.0, investments)
+        val result = rebalanceUseCase.rebalance(150.0, investments)
 
         assertEquals(0.0, result[0].investedAmount!!, 0.01)
         assertTrue(result[0].targetValue!! == 380.0)
