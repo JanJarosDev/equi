@@ -1,6 +1,7 @@
-package com.jjdev.equi
+package com.jjdev.equi.dashboard.presentation
 
 import com.jjdev.equi.core.base.presentation.BaseViewModel
+import com.jjdev.equi.dashboard.presentation.model.DashboardScreenViewState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,4 +1,4 @@
-package com.jjdev.equi
+package com.jjdev.equi.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

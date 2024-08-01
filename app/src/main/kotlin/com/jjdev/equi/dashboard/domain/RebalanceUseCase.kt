@@ -1,5 +1,6 @@
-package com.jjdev.equi
+package com.jjdev.equi.dashboard.domain
 
+import com.jjdev.equi.dashboard.domain.model.Investment
 import com.jjdev.equi.core.base.domain.AppError
 import com.jjdev.equi.core.base.domain.Result
 import com.jjdev.equi.core.base.domain.UseCase

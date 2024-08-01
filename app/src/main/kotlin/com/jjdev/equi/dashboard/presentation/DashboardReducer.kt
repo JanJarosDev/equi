@@ -1,6 +1,7 @@
-package com.jjdev.equi
+package com.jjdev.equi.dashboard.presentation
 
 import androidx.compose.runtime.Immutable
+import com.jjdev.equi.dashboard.domain.model.Investment
 import com.jjdev.equi.core.base.presentation.Reducer
 
 class DashboardScreenReducer :

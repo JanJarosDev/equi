@@ -1,4 +1,4 @@
-package com.jjdev.equi
+package com.jjdev.equi.dashboard.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -6,6 +6,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.jjdev.equi.ui.DetailsListComponent
+import com.jjdev.equi.ui.PieChartColors
+import com.jjdev.equi.ui.PieChartComponent
 import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable

@@ -1,4 +1,4 @@
-package com.jjdev.equi
+package com.jjdev.equi.ui
 
 import androidx.compose.ui.graphics.Color
 
