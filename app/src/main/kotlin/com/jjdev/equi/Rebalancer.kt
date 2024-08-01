@@ -2,16 +2,7 @@ package com.jjdev.equi
 
 import java.util.logging.Logger
 
-data class Investment(
-    val ticker: String,
-    val weight: Double,
-    val currentValue: Double,
-    var investedAmount: Double? = null,
-    var targetValue: Double? = null,
-)
-
 class Rebalancer {
-
     private val logger = Logger.getLogger(Rebalancer::class.java.name)
 
     fun rebalance(amountToInvest: Double, investments: List<Investment>): List<Investment> {
