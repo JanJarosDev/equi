@@ -2,8 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
-    id("com.google.dagger.hilt.android")
-    id("kotlin-kapt")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -44,6 +44,10 @@ android {
 
     kapt {
         correctErrorTypes = true
+    }
+
+    hilt {
+        enableAggregatingTask = true
     }
 }
 

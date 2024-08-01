@@ -18,6 +18,7 @@ hiltVersion = "2.51"
 hiltExtVersion = "1.2.0"
 junitJupiterVersion = "5.10.3"
 junitVersion = "1.2.1"
+kaptVersion = "2.0.0"
 kotlinVersion = "2.0.0"
 koverVersion = "0.8.3"
 kspVersion = "1.9.24-1.0.20"
@@ -70,5 +71,6 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltVersion" }
 jetbrains-dokka = { id = "org.jetbrains.dokka", version.ref = "dokkaVersion" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
 jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "koverVersion" }
+kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kaptVersion"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 merge-sarif = { id = "merge-sarif", version.ref = "collectSarifVersion" }
