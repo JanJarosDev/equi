@@ -1,21 +1,21 @@
 package com.jjdev.equi.dashboard.presentation
 
 import com.jjdev.equi.core.base.presentation.BaseViewModel
-import com.jjdev.equi.dashboard.presentation.model.DashboardScreenViewState
+import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEffect
+import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
+import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import timber.log.Timber
 
-class DashboardViewModel :
-    BaseViewModel<DashboardScreenReducer.DashboardState, DashboardScreenReducer.DashboardEvent, DashboardScreenReducer.DashboardEffect>(
-        initialState = DashboardScreenReducer.DashboardState.initial(),
-        reducer = DashboardScreenReducer(),
-    ) {
+class DashboardViewModel : BaseViewModel<DashboardState, DashboardEvent, DashboardEffect>(
+    initialState = DashboardState.initial(),
+    reducer = DashboardScreenReducer(),
+) {
 
-    private val _data = MutableStateFlow<DashboardScreenViewState?>(null)
-    val data: StateFlow<DashboardScreenViewState?> = _data.asStateFlow()
+    private val _data = MutableStateFlow(DashboardState.initial())
+    val data: StateFlow<DashboardState> = _data.asStateFlow()
 
     init {
         Timber.i("Initializing DashboardViewModel")
@@ -24,8 +24,6 @@ class DashboardViewModel :
 
     private fun fetchData() {
         Timber.i("Fetching data")
-        _data.update {
-            null
-        }.also { Timber.i("Data updated") }
+        _data.also { Timber.i("Data updated") }
     }
 }

@@ -23,6 +23,7 @@ import com.jjdev.equi.ui.PieChartComponent
 
 @Composable
 fun DashboardScreen(
+    state: DashboardScreenReducer.DashboardState,
     modifier: Modifier = Modifier,
 ) {
     //Todo replace with state arguments
@@ -75,5 +76,7 @@ fun DashboardScreen(
 @Preview
 @Composable
 fun DashboardScreenPreview() {
-    DashboardScreen()
+    DashboardScreen(
+        state = DashboardScreenReducer.DashboardState.initial()
+    )
 }

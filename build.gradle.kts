@@ -12,6 +12,7 @@ plugins {
     alias(libs.plugins.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
     alias(libs.plugins.compose.compiler) apply false
+    id("com.google.dagger.hilt.android") version "2.51" apply false
 }
 
 subprojects {

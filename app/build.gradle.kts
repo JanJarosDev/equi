@@ -1,8 +1,9 @@
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -40,6 +41,10 @@ android {
     kotlinOptions {
         jvmTarget = JVM_TARGET_VERSION
     }
+
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -49,6 +54,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.navigation)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.lifecycle.compose)
+    kapt(libs.hilt.ext.compiler)
 
     //Compose
     implementation(platform(libs.androidx.compose.bom))

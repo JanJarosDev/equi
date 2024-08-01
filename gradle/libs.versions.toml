@@ -2,7 +2,7 @@
 activityComposeVersion = "1.9.1"
 agpVersion = "8.7.0-alpha03"
 androidxHiltNavigationComposeVersion = "1.2.0"
-androidxNavigationCompose = "2.4.0-alpha10"
+androidxNavigationCompose = "2.7.7"
 appcompatVersion = "1.7.0"
 coilComposeVersion = "2.6.0"
 collectSarifVersion = "1.0.0"
@@ -22,6 +22,7 @@ kotlinVersion = "2.0.0"
 koverVersion = "0.8.3"
 kspVersion = "1.9.24-1.0.20"
 lifecycleVersion = "2.8.4"
+lifecycleCompose = "2.8.4"
 material3AndroidVersion = "1.2.1"
 timberVersion = "5.0.1"
 uiGraphicsAndroidVersion = "1.6.8"
@@ -39,6 +40,7 @@ androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-co
 androidx-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android", version.ref = "foundationAndroidVersion" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationComposeVersion" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-lifecycle-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycleCompose" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigationCompose" }
 androidx-material3-android = { group = "androidx.compose.material3", name = "material3-android", version.ref = "material3AndroidVersion" }
