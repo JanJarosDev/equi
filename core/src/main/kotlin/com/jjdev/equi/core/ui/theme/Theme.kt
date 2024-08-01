@@ -1,6 +1,6 @@
 @file:Suppress("UnusedPrivateProperty")
 
-package com.jjdev.equi.ui.theme
+package com.jjdev.equi.core.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat

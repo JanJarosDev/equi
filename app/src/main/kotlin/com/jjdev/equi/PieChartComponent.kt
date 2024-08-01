@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.jjdev.equi.ui.theme.dimens
+import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable
 fun PieChartComponent(

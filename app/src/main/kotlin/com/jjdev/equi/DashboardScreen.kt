@@ -6,7 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.jjdev.equi.ui.theme.dimens
+import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable
 fun DashboardScreen(
