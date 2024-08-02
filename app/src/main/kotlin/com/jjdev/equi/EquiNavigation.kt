@@ -10,8 +10,9 @@ import androidx.navigation.compose.rememberNavController
 import com.jjdev.equi.dashboard.presentation.DashboardScreen
 import com.jjdev.equi.dashboard.presentation.DashboardViewModel
 
+@Suppress("ViewModelInjection")
 @Composable
-fun EquiNavigation(modifier: Modifier) {
+fun EquiNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "dashboard") {
         composable("dashboard") {

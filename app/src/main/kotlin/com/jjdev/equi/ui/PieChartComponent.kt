@@ -17,12 +17,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
 
 private const val CIRCLE_RADIUS = 360
 
 @Composable
 fun PieChartComponent(
-    data: List<Triple<String, Int, Double>>,
+    data: ImmutableList<Triple<String, Int, Double>>,
+    modifier: Modifier = Modifier
 ) {
     val outerRadius = 280.dp
     val chartBarWidth: Dp = 35.dp
@@ -40,7 +43,7 @@ fun PieChartComponent(
     var lastValue = 0f
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background),
     ) {
@@ -79,7 +82,7 @@ private const val VALUE_MOCK = 100.0
 @Composable
 fun PieChartComponentPreview() {
     PieChartComponent(
-        data = listOf(
+        data = persistentListOf(
             Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
             Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
         ),

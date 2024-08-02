@@ -24,9 +24,10 @@ import com.jjdev.equi.core.ui.theme.dimens
 fun DetailItemComponent(
     data: Triple<String, Int, Double>,
     color: Color,
+    modifier: Modifier = Modifier,
 ) {
     Surface(
-        modifier = Modifier
+        modifier = modifier
             .background(MaterialTheme.colorScheme.surface)
             .padding(
                 vertical = MaterialTheme.dimens.small,

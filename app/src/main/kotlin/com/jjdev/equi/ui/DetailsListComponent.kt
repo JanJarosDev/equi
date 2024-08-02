@@ -6,15 +6,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun DetailsListComponent(
-    data: List<Triple<String, Int, Double>>,
-    colors: List<Color>
+    data: ImmutableList<Triple<String, Int, Double>>,
+    colors: ImmutableList<Color>,
+    modifier: Modifier = Modifier
 ) {
     //Todo lazycolumn
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier.fillMaxWidth()
     ) {
         data.forEachIndexed { index, value ->
             DetailItemComponent(
@@ -33,10 +37,10 @@ private const val VALUE_MOCK = 100.0
 @Composable
 fun DetailsListComponentPreview() {
     DetailsListComponent(
-        data = listOf(
+        data = persistentListOf(
             Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
             Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
         ),
-        colors = PieChartColors.entries.map { it.color }
+        colors = PieChartColors.entries.map { it.color }.toPersistentList()
     )
 }
