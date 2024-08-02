@@ -31,7 +31,14 @@ class RebalanceUseCase @Inject constructor() :
         }
 
         val finalInvestments = investmentsWithIndex
-            .map { it.copy(investment = it.investment.copy(investedAmount = floor(it.investment.investedAmount ?: 0.0))) }
+            .map {
+                it.copy(
+                    investment = it.investment.copy(
+                        investedAmount = floor(it.investment.investedAmount ?: 0.0),
+                        targetValue = it.investment.currentValue
+                    ),
+                )
+            }
             .sortedBy { it.index } // Sort back to original order
 
         val resultInvestments = finalInvestments.map { it.investment }
@@ -40,7 +47,10 @@ class RebalanceUseCase @Inject constructor() :
         return Result.Success(resultInvestments)
     }
 
-    private fun addIncrementalFunds(increment: Double, investments: MutableList<IndexedInvestment>): Double {
+    private fun addIncrementalFunds(
+        increment: Double,
+        investments: MutableList<IndexedInvestment>
+    ): Double {
         // Calculate the current total value including the increment
         val totalValue = investments.sumOf { it.investment.currentValue } + increment
 
@@ -51,7 +61,8 @@ class RebalanceUseCase @Inject constructor() :
         } ?: return 0.0
 
         // Allocate the incremental fund to the most underweighted investment
-        targetInvestment.investment.investedAmount = (targetInvestment.investment.investedAmount ?: 0.0) + increment
+        targetInvestment.investment.investedAmount =
+            (targetInvestment.investment.investedAmount ?: 0.0) + increment
         targetInvestment.investment.currentValue += increment
         Timber.i("Added $increment to ${targetInvestment.investment.ticker}, new currentValue: ${targetInvestment.investment.currentValue}")
 
