@@ -12,6 +12,8 @@ plugins {
     alias(libs.plugins.collect.sarif) apply false
     alias(libs.plugins.jetbrains.kotlinx.kover) apply true
     alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.kapt) apply false
 }
 
 subprojects {
@@ -32,6 +34,7 @@ subprojects {
         }
 
         tasks.withType<Detekt>().configureEach {
+            setSource(files("src/main/kotlin", "src/test/kotlin", "build.gradle.kts", "settings.gradle.kts"))
             reports {
                 sarif.required.set(true)
             }
@@ -93,9 +96,20 @@ kover {
             }
         }
         filters {
+            includes {
+                // Include all classes in the project that end with "ViewModel", "UseCase", "Reducer", or "Repository"
+                classes(
+                    "com.jjdev.equi.*ViewModel",
+                    "com.jjdev.equi.*UseCase",
+                    "com.jjdev.equi.*Reducer",
+                    "com.jjdev.equi.*Repository"
+                )
+            }
             excludes {
-                classes("com.jjdev.equi.ui.theme.*")
-                classes("com.jjdev.equi.core.base.*")
+                // Exclude all classes in the "core.base" package
+                packages(
+                    "com.jjdev.equi.core.base.*"
+                )
             }
         }
     }
