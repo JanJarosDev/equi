@@ -96,12 +96,12 @@ kover {
         }
         filters {
             includes {
-                // Include all classes in the project that end with "ViewModel", "UseCase", "Reducer", or "Repository"
+                // Include all classes in the specific package that end with "ViewModel", "UseCase", "Reducer", or "Repository"
                 classes(
-                    "*.ViewModel",
-                    "*.UseCase",
-                    "*.Reducer",
-                    "*.Repository"
+                    "com.jjdev.equi.*ViewModel",
+                    "com.jjdev.equi.*UseCase",
+                    "com.jjdev.equi.*Reducer",
+                    "com.jjdev.equi.*Repository"
                 )
             }
         }
