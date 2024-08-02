@@ -28,6 +28,14 @@ class DetektPlugin : Plugin<Project> {
                 } else {
                     config.from(rootDetektConfig, rootDetektComposeConfig)
                 }
+                source.from(
+                    target.files(
+                        "src/main/kotlin",
+                        "src/test/kotlin",
+                        "build.gradle.kts",
+                        "settings.gradle.kts"
+                    )
+                )
             }
 
             val detektTask = target.tasks.named("detekt", Detekt::class.java)
