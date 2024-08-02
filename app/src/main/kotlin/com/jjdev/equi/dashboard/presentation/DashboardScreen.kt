@@ -60,7 +60,6 @@ fun DashboardScreen(
     if (state.dialogShown) {
         AddDialog(
             sendEvent = sendEvent,
-            modifier = modifier
         )
     }
 
@@ -107,6 +106,8 @@ fun DashboardScreen(
     }
 }
 
+//TODO refactor to state
+@Suppress("LongMethod")
 @Composable
 fun AddDialog(
     sendEvent: (event: DashboardEvent) -> Unit,
