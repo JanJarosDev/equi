@@ -3,7 +3,12 @@ $dokka.linkExtension:html
 
 module:app
 com.jjdev.equi
-com.jjdev.equi.ui.theme
+com.jjdev.equi.dashboard.domain
+com.jjdev.equi.dashboard.domain.model
+com.jjdev.equi.dashboard.presentation
+com.jjdev.equi.dashboard.presentation.model
+com.jjdev.equi.ui
 module:core
 com.jjdev.equi.core.base.domain
 com.jjdev.equi.core.base.presentation
+com.jjdev.equi.core.ui.theme
