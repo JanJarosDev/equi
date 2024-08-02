@@ -35,6 +35,7 @@ import com.jjdev.equi.dashboard.presentation.model.NewInvestment
 import com.jjdev.equi.ui.DetailsListComponent
 import com.jjdev.equi.ui.PieChartColors
 import com.jjdev.equi.ui.PieChartComponent
+import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun DashboardScreen(
@@ -46,93 +47,21 @@ fun DashboardScreen(
     val tempData = if (state.rebalancedInvestments.isNotEmpty()) {
         state.rebalancedInvestments.map {
             Triple(it.ticker, it.percentage, it.newAmount)
-        }
+        }.toPersistentList()
     } else {
         state.investments.map {
             Triple(it.ticker, it.percentage, 0.0)
-        }
+        }.toPersistentList()
     }
 
-    val tempColors = PieChartColors.entries.map { it.color }
+    val tempColors = PieChartColors.entries.map { it.color }.toPersistentList()
 
 
     if (state.dialogShown) {
-        Dialog(
-            onDismissRequest = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }
-        ) {
-            var ticker by remember { mutableStateOf("") }
-            var value by remember { mutableStateOf("") }
-            var percentage by remember { mutableStateOf("") }
-            Surface(shape = MaterialTheme.shapes.medium) {
-                Column {
-                    Column(Modifier.padding(MaterialTheme.dimens.large)) {
-                        Text(
-                            text = "Add investment",
-                            style = MaterialTheme.typography.titleLarge
-                        )
-                        Spacer(Modifier.size((MaterialTheme.dimens.small)))
-                        Text("Ticker")
-                        TextField(
-                            value = ticker,
-                            onValueChange = {
-                                ticker = it
-                            },
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Text
-                            ),
-                            visualTransformation = CapitalizeTransformation()
-
-                        )
-                        Text("Value")
-                        TextField(
-                            value = value,
-                            onValueChange = {
-                                value = it
-                            },
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Number
-                            ),
-                        )
-                        Text("Percentage")
-                        TextField(
-                            value = percentage,
-                            onValueChange = {
-                                percentage = it
-                            },
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Number
-                            ),
-                        )
-                    }
-                    Row(
-                        Modifier
-                            .padding(MaterialTheme.dimens.small)
-                            .fillMaxWidth(),
-                        Arrangement.spacedBy(MaterialTheme.dimens.small, Alignment.End),
-                    ) {
-                        Button(onClick = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }) {
-                            Text("Close")
-                        }
-                        Button(onClick = {
-                            sendEvent(
-                                DashboardEvent.AddInvestment(
-                                    NewInvestment(
-                                        ticker,
-                                        percentage.toInt(),
-                                        value.toDouble()
-                                    )
-                                )
-                            )
-                            ticker = ""
-                            value = ""
-                            percentage = ""
-                        }) {
-                            Text("Add")
-                        }
-                    }
-                }
-            }
-        }
+        AddDialog(
+            sendEvent = sendEvent,
+            modifier = modifier
+        )
     }
 
     Column(
@@ -174,6 +103,89 @@ fun DashboardScreen(
                 )
         ) {
             Text("Rebalance")
+        }
+    }
+}
+
+@Composable
+fun AddDialog(
+    sendEvent: (event: DashboardEvent) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Dialog(
+        onDismissRequest = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }
+    ) {
+        var ticker by remember { mutableStateOf("") }
+        var value by remember { mutableStateOf("") }
+        var percentage by remember { mutableStateOf("") }
+        Surface(shape = MaterialTheme.shapes.medium, modifier = modifier) {
+            Column {
+                Column(Modifier.padding(MaterialTheme.dimens.large)) {
+                    Text(
+                        text = "Add investment",
+                        style = MaterialTheme.typography.titleLarge
+                    )
+                    Spacer(Modifier.size((MaterialTheme.dimens.small)))
+                    Text("Ticker")
+                    TextField(
+                        value = ticker,
+                        onValueChange = {
+                            ticker = it
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Text
+                        ),
+                        visualTransformation = CapitalizeTransformation()
+
+                    )
+                    Text("Value")
+                    TextField(
+                        value = value,
+                        onValueChange = {
+                            value = it
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number
+                        ),
+                    )
+                    Text("Percentage")
+                    TextField(
+                        value = percentage,
+                        onValueChange = {
+                            percentage = it
+                        },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number
+                        ),
+                    )
+                }
+                Row(
+                    Modifier
+                        .padding(MaterialTheme.dimens.small)
+                        .fillMaxWidth(),
+                    Arrangement.spacedBy(MaterialTheme.dimens.small, Alignment.End),
+                ) {
+                    Button(onClick = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }) {
+                        Text("Close")
+                    }
+                    Button(onClick = {
+                        sendEvent(
+                            DashboardEvent.AddInvestment(
+                                NewInvestment(
+                                    ticker,
+                                    percentage.toInt(),
+                                    value.toDouble()
+                                )
+                            )
+                        )
+                        ticker = ""
+                        value = ""
+                        percentage = ""
+                    }) {
+                        Text("Add")
+                    }
+                }
+            }
         }
     }
 }
