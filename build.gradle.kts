@@ -96,12 +96,12 @@ kover {
         }
         filters {
             includes {
-                // Include all classes ending with "ViewModel", "UseCase", "Reducer", or "Repository"
+                // Include all classes in the project that end with "ViewModel", "UseCase", "Reducer", or "Repository"
                 classes(
-                    ".*ViewModel",
-                    ".*UseCase",
-                    ".*Reducer",
-                    ".*Repository"
+                    "**/*ViewModel",
+                    "**/*UseCase",
+                    "**/*Reducer",
+                    "**/*Repository"
                 )
             }
         }
