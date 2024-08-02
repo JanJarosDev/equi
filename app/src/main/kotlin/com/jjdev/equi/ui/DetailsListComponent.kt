@@ -14,16 +14,19 @@ import kotlinx.collections.immutable.toPersistentList
 fun DetailsListComponent(
     data: ImmutableList<Triple<String, Int, Int>>,
     colors: ImmutableList<Color>,
-    modifier: Modifier = Modifier
+    isLoading: Boolean = false,
+    modifier: Modifier = Modifier,
 ) {
     //Todo lazycolumn
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
     ) {
         data.forEachIndexed { index, value ->
             DetailItemComponent(
                 data = value,
-                color = colors[index]
+                color = colors[index],
+                isLoading = isLoading,
             )
         }
     }

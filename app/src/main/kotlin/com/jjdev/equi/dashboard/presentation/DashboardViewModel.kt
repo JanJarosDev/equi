@@ -27,6 +27,7 @@ class DashboardViewModel @Inject constructor(
     }
 
     fun onRebalanceClick(amountToInvest: Double, investments: List<NewInvestment>) {
+        sendEvent(DashboardEvent.UpdateRebalanceLoading(isLoading = true))
         viewModelScope.launch {
             rebalanceUseCase(amountToInvest to investments.toInvestmentList()).onSuccess {
                 Timber.i("Rebalanced investments: $it")

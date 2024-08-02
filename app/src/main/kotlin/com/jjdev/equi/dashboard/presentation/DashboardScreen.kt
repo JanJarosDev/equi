@@ -68,11 +68,12 @@ fun DashboardScreen(
             .padding(top = MaterialTheme.dimens.tripleExtraLarge)
             .fillMaxSize()
     ) {
-        PieChartComponent(data = tempData)
-        DetailsListComponent(data = tempData, colors = tempColors)
+        PieChartComponent(data = tempData, isLoading = state.isLoading)
+        DetailsListComponent(data = tempData, colors = tempColors, isLoading = state.isLoading)
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = { sendEvent(DashboardEvent.UpdateDialog(show = true)) },
+            enabled = !state.isLoading,
             modifier = Modifier
                 .padding(bottom = MaterialTheme.dimens.large)
                 .align(
@@ -95,6 +96,7 @@ fun DashboardScreen(
         )
         Button(
             onClick = { onRebalanceClick(amount.toDouble(), state.investments) },
+            enabled = !state.isLoading,
             modifier = Modifier
                 .padding(bottom = MaterialTheme.dimens.large)
                 .align(
@@ -111,7 +113,7 @@ fun DashboardScreen(
 @Composable
 fun AddDialog(
     sendEvent: (event: DashboardEvent) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Dialog(
         onDismissRequest = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }
