@@ -11,4 +11,5 @@ com.jjdev.equi.ui
 module:core
 com.jjdev.equi.core.base.domain
 com.jjdev.equi.core.base.presentation
+com.jjdev.equi.core.ui
 com.jjdev.equi.core.ui.theme
