@@ -9,6 +9,8 @@ import timber.log.Timber
 import javax.inject.Inject
 import kotlin.math.floor
 
+private const val INCREMENT_VALUE = 0.1
+
 class RebalanceUseCase @Inject constructor() :
     UseCase<Pair<Double, List<Investment>>, List<Investment>, AppError?>(
         dispatcher = Dispatchers.Default
@@ -27,7 +29,7 @@ class RebalanceUseCase @Inject constructor() :
         var remainingAmount = totalAmountToInvest
 
         while (remainingAmount > 0.0) {
-            remainingAmount -= addIncrementalFunds(0.1, investmentsWithIndex)
+            remainingAmount -= addIncrementalFunds(INCREMENT_VALUE, investmentsWithIndex)
         }
 
         val finalInvestments = investmentsWithIndex
@@ -49,7 +51,7 @@ class RebalanceUseCase @Inject constructor() :
 
     private fun addIncrementalFunds(
         increment: Double,
-        investments: MutableList<IndexedInvestment>
+        investments: MutableList<IndexedInvestment>,
     ): Double {
         // Calculate the current total value including the increment
         val totalValue = investments.sumOf { it.investment.currentValue } + increment
@@ -64,14 +66,16 @@ class RebalanceUseCase @Inject constructor() :
         targetInvestment.investment.investedAmount =
             (targetInvestment.investment.investedAmount ?: 0.0) + increment
         targetInvestment.investment.currentValue += increment
-        Timber.i("Added $increment to ${targetInvestment.investment.ticker}, new currentValue: ${targetInvestment.investment.currentValue}")
-
+        Timber.i(
+            "Added $increment to ${targetInvestment.investment.ticker}, " +
+                    "new currentValue: ${targetInvestment.investment.currentValue}"
+        )
         return increment
     }
 
     data class IndexedInvestment(
         val index: Int,
-        val investment: Investment
+        val investment: Investment,
     )
 }
 
