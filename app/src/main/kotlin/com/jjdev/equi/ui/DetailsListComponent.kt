@@ -12,7 +12,7 @@ import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun DetailsListComponent(
-    data: ImmutableList<Triple<String, Int, Double>>,
+    data: ImmutableList<Triple<String, Int, Int>>,
     colors: ImmutableList<Color>,
     modifier: Modifier = Modifier
 ) {
@@ -31,7 +31,7 @@ fun DetailsListComponent(
 
 private const val TICKER_MOCK = "EGU"
 private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100.0
+private const val VALUE_MOCK = 100
 
 @Preview
 @Composable

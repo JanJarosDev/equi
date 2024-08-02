@@ -22,7 +22,7 @@ import com.jjdev.equi.core.ui.theme.dimens
 
 @Composable
 fun DetailItemComponent(
-    data: Triple<String, Int, Double>,
+    data: Triple<String, Int, Int>,
     color: Color,
     modifier: Modifier = Modifier,
 ) {
@@ -73,7 +73,7 @@ fun DetailItemComponent(
 
 private const val TICKER_MOCK = "EGU"
 private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100.0
+private const val VALUE_MOCK = 100
 
 @Preview
 @Composable
