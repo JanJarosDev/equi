@@ -14,8 +14,8 @@ import kotlinx.collections.immutable.toPersistentList
 fun DetailsListComponent(
     data: ImmutableList<Triple<String, Int, Int>>,
     colors: ImmutableList<Color>,
-    isLoading: Boolean = false,
     modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
 ) {
     //Todo lazycolumn
     Column(

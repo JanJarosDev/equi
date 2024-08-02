@@ -30,12 +30,13 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 
 private const val CIRCLE_RADIUS = 360
+private const val LOADING_ANIMATION_DURATION = 3000
 
 @Composable
 fun PieChartComponent(
     data: ImmutableList<Triple<String, Int, Int>>,
-    isLoading: Boolean = false,
     modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
 ) {
     val outerRadius = 280.dp
     val chartBarWidth: Dp = 35.dp
@@ -62,7 +63,7 @@ fun PieChartComponent(
                 angle.animateTo(
                     targetValue = 360f,
                     animationSpec = infiniteRepeatable(
-                        animation = tween(3000, easing = LinearEasing),
+                        animation = tween(LOADING_ANIMATION_DURATION, easing = LinearEasing),
                         repeatMode = RepeatMode.Restart
                     )
                 )
