@@ -46,11 +46,11 @@ fun DashboardScreen(
 ) {
     val tempData = if (state.rebalancedInvestments.isNotEmpty()) {
         state.rebalancedInvestments.map {
-            Triple(it.ticker, it.percentage, it.newAmount)
+            Triple(it.ticker, it.percentage, it.newAmount.toInt())
         }.toPersistentList()
     } else {
         state.investments.map {
-            Triple(it.ticker, it.percentage, 0.0)
+            Triple(it.ticker, it.percentage, 0)
         }.toPersistentList()
     }
 

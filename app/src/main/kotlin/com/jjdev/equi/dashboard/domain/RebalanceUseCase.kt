@@ -7,6 +7,9 @@ import com.jjdev.equi.dashboard.domain.model.Investment
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.math.floor
+
+private const val INCREMENT_VALUE = 0.1
 
 class RebalanceUseCase @Inject constructor() :
     UseCase<Pair<Double, List<Investment>>, List<Investment>, AppError?>(
@@ -14,86 +17,65 @@ class RebalanceUseCase @Inject constructor() :
     ) {
 
     override suspend fun execute(parameters: Pair<Double, List<Investment>>): Result<List<Investment>, AppError?> {
+        val (totalAmountToInvest, investments) = parameters
 
-        val (amountToInvest, investments) = parameters
+        Timber.i("Starting rebalance with totalAmountToInvest: $totalAmountToInvest and investments: $investments")
 
-        Timber.i("Starting rebalance with amountToInvest: $amountToInvest and investments: $investments")
-
-        val totalWeight = investments.sumOf { it.weight }
-        if (totalWeight != 1.0) {
-            Timber.i("Weights must sum to 1.0. Current total weight: $totalWeight")
-            throw IllegalArgumentException("Weights must sum to 1.0")
-        }
-
-        val totalFutureValue = investments.sumOf { it.currentValue } + amountToInvest
-        Timber.i("Total future value calculated: $totalFutureValue")
-
-        val adjustedInvestments = investments.map {
-            val investedAmount = amountToInvest * it.weight
-            val targetValue = totalFutureValue * it.weight
-            Timber.i("Investment ${it.ticker}: investedAmount=$investedAmount, targetValue=$targetValue")
-            it.copy(investedAmount = investedAmount, targetValue = targetValue)
+        // Preserve the original order by indexing the investments
+        val investmentsWithIndex = investments.mapIndexed { index, investment ->
+            IndexedInvestment(index, investment)
         }.toMutableList()
 
-        Timber.i("Initial investments adjusted: $adjustedInvestments")
+        var remainingAmount = totalAmountToInvest
 
-        var excessAmount = adjustInvestments(adjustedInvestments)
-        while (excessAmount > 0.0) {
-            Timber.i("Excess amount to reallocate: $excessAmount")
-            excessAmount = adjustInvestments(
-                adjustedInvestments.filter { it.investedAmount!! > 0 }, excessAmount
-            )
+        while (remainingAmount > 0.0) {
+            remainingAmount -= addIncrementalFunds(INCREMENT_VALUE, investmentsWithIndex)
         }
 
-        Timber.i("Final rebalanced investments: $adjustedInvestments")
-        return Result.Success(adjustedInvestments)
+        val finalInvestments = investmentsWithIndex
+            .map {
+                it.copy(
+                    investment = it.investment.copy(
+                        investedAmount = floor(it.investment.investedAmount ?: 0.0),
+                        targetValue = it.investment.currentValue
+                    ),
+                )
+            }
+            .sortedBy { it.index } // Sort back to original order
+
+        val resultInvestments = finalInvestments.map { it.investment }
+
+        Timber.i("Final rebalanced investments: $resultInvestments")
+        return Result.Success(resultInvestments)
     }
 
-    private fun adjustInvestments(
-        investments: List<Investment>,
-        excessAmount: Double = 0.0,
+    private fun addIncrementalFunds(
+        increment: Double,
+        investments: MutableList<IndexedInvestment>,
     ): Double {
-        Timber.i("Adjusting investments with initial excessAmount: $excessAmount")
-        var totalExcessAmount = excessAmount
+        // Calculate the current total value including the increment
+        val totalValue = investments.sumOf { it.investment.currentValue } + increment
 
-        investments.forEach {
-            if (it.currentValue >= it.targetValue!!) {
-                totalExcessAmount += it.investedAmount!!
-                Timber.i(
-                    "No excess from ${it.ticker}, adding investedAmount=${it.investedAmount}," +
-                            " new totalExcessAmount=$totalExcessAmount"
-                )
-                it.investedAmount = 0.0
-            } else {
-                val combinedValue = it.investedAmount!! + it.currentValue
-                if (combinedValue > it.targetValue!!) {
-                    val excess = combinedValue - it.targetValue!!
-                    totalExcessAmount += excess
-                    Timber.i(
-                        "Excess from ${it.ticker}: $excess, " + "new investedAmount=${it.investedAmount}"
-                    )
-                    it.investedAmount = it.investedAmount!! - excess
-                }
-            }
-        }
+        // Find the most underweighted investment
+        val targetInvestment = investments.maxByOrNull {
+            val currentWeight = it.investment.currentValue / totalValue
+            it.investment.weight - currentWeight
+        } ?: return 0.0
 
-        val remainingInvestments = investments.filter { it.investedAmount!! > 0 }
-        val weightLeft = remainingInvestments.sumOf { it.weight }
-        Timber.i("Weight left after adjustment: $weightLeft")
-
-        remainingInvestments.forEach {
-            if (totalExcessAmount > 0.0) {
-                val movingAmount = (totalExcessAmount / weightLeft) * it.weight
-                it.investedAmount = it.investedAmount!! + movingAmount
-                totalExcessAmount -= movingAmount
-                Timber.i(
-                    "Investment ${it.ticker}: Adjusted investedAmount=${it.investedAmount}," +
-                            " remaining totalExcessAmount=$totalExcessAmount"
-                )
-            }
-        }
-
-        Timber.i("Total excess amount after adjustment: $totalExcessAmount")
-        return totalExcessAmount
+        // Allocate the incremental fund to the most underweighted investment
+        targetInvestment.investment.investedAmount =
+            (targetInvestment.investment.investedAmount ?: 0.0) + increment
+        targetInvestment.investment.currentValue += increment
+        Timber.i(
+            "Added $increment to ${targetInvestment.investment.ticker}, " +
+                    "new currentValue: ${targetInvestment.investment.currentValue}"
+        )
+        return increment
     }
+
+    data class IndexedInvestment(
+        val index: Int,
+        val investment: Investment,
+    )
 }
+

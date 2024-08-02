@@ -24,7 +24,7 @@ private const val CIRCLE_RADIUS = 360
 
 @Composable
 fun PieChartComponent(
-    data: ImmutableList<Triple<String, Int, Double>>,
+    data: ImmutableList<Triple<String, Int, Int>>,
     modifier: Modifier = Modifier
 ) {
     val outerRadius = 280.dp
@@ -76,7 +76,7 @@ fun PieChartComponent(
 
 private const val TICKER_MOCK = "EGU"
 private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100.0
+private const val VALUE_MOCK = 100
 
 @Preview
 @Composable
