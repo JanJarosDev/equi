@@ -96,8 +96,17 @@ kover {
         }
         filters {
             excludes {
-                classes("com.jjdev.equi.ui.theme.*")
-                classes("com.jjdev.equi.core.base.*")
+                // Exclude classes ending with "App", "Navigation", or "Activity"
+                classes(
+                    "com.jjdev.equi.*App",
+                    "com.jjdev.equi.*Navigation",
+                    "com.jjdev.equi.*Activity"
+                )
+                // Exclude all classes in the "ui" folder in both main and core packages
+                packages(
+                    "com.jjdev.equi.ui.*",
+                    "com.jjdev.equi.core.ui.*"
+                )
             }
         }
     }
