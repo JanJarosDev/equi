@@ -111,7 +111,7 @@ class RebalanceUseCaseTest {
             Investment("C", 0.3, 200.0),
         )
 
-        rebalanceUseCase(Pair(150.0, investments)).onSuccess { it ->
+        rebalanceUseCase(Pair(150.0, investments)).onSuccess {
             assertEquals(0.0, it[0].investedAmount!!, 0.01)
             assertTrue(it[0].targetValue!! == 380.0)
 

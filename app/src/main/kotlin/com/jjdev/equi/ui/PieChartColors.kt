@@ -2,6 +2,7 @@ package com.jjdev.equi.ui
 
 import androidx.compose.ui.graphics.Color
 
+@Suppress("MagicNumber")
 enum class PieChartColors(val color: Color) {
     RED(Color(0xFFFF4C4C)),
     GREEN(Color(0xFF4CAF50)),

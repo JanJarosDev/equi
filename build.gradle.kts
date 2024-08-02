@@ -34,6 +34,7 @@ subprojects {
         }
 
         tasks.withType<Detekt>().configureEach {
+            setSource(files("src/main/kotlin", "src/test/kotlin", "build.gradle.kts", "settings.gradle.kts"))
             reports {
                 sarif.required.set(true)
             }

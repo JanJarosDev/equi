@@ -25,11 +25,18 @@ fun DetailsListComponent(
     }
 }
 
+private const val TICKER_MOCK = "EGU"
+private const val PERCENTAGE_MOCK = 10
+private const val VALUE_MOCK = 100.0
+
 @Preview
 @Composable
 fun DetailsListComponentPreview() {
     DetailsListComponent(
-        data = listOf(Triple("EGU", 10, 100.0), Triple("XXX", 10, 100.0)),
+        data = listOf(
+            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
+            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+        ),
         colors = PieChartColors.entries.map { it.color }
     )
 }

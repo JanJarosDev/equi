@@ -57,7 +57,9 @@ fun DashboardScreen(
 
 
     if (state.dialogShown) {
-        Dialog({ sendEvent(DashboardEvent.UpdateDialog(show = false)) }) {
+        Dialog(
+            onDismissRequest = { sendEvent(DashboardEvent.UpdateDialog(show = false)) }
+        ) {
             var ticker by remember { mutableStateOf("") }
             var value by remember { mutableStateOf("") }
             var percentage by remember { mutableStateOf("") }
@@ -134,7 +136,7 @@ fun DashboardScreen(
     }
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = MaterialTheme.dimens.tripleExtraLarge)
             .fillMaxSize()
     ) {

@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
 
+private const val CIRCLE_RADIUS = 360
+
 @Composable
 fun PieChartComponent(
     data: List<Triple<String, Int, Double>>,
@@ -31,7 +33,7 @@ fun PieChartComponent(
 
     //TODO Move to VM
     data.forEachIndexed { index, values ->
-        floatValue.add(index, 360 * data[index].second.toFloat() / totalSum.toFloat())
+        floatValue.add(index, CIRCLE_RADIUS * data[index].second.toFloat() / totalSum.toFloat())
     }
 
     //TODO Move to VM
@@ -69,10 +71,17 @@ fun PieChartComponent(
     }
 }
 
+private const val TICKER_MOCK = "EGU"
+private const val PERCENTAGE_MOCK = 10
+private const val VALUE_MOCK = 100.0
+
 @Preview
 @Composable
 fun PieChartComponentPreview() {
     PieChartComponent(
-        data = listOf(Triple("EGU", 10, 100.0), Triple("XXX", 10, 100.0)),
+        data = listOf(
+            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
+            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+        ),
     )
 }

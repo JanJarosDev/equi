@@ -5,5 +5,4 @@ import dagger.hilt.android.HiltAndroidApp
 
 @SuppressWarnings("deprecation")
 @HiltAndroidApp
-class App : Application() {
-}
+class App : Application()
