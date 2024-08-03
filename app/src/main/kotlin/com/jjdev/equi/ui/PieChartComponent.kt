@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
+import com.jjdev.equi.dashboard.presentation.model.Investment
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
@@ -34,7 +35,7 @@ private const val LOADING_ANIMATION_DURATION = 3000
 
 @Composable
 fun PieChartComponent(
-    data: ImmutableList<Triple<String, Int, Int>>,
+    investments: ImmutableList<Investment>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
@@ -42,12 +43,12 @@ fun PieChartComponent(
     val chartBarWidth: Dp = 35.dp
 
     //TODO Move to VM
-    val totalSum = data.sumOf { it.second }
+    val totalSum = investments.sumOf { it.weight }
     val floatValue = mutableListOf<Float>()
 
     //TODO Move to VM
-    data.forEachIndexed { index, values ->
-        floatValue.add(index, CIRCLE_RADIUS * data[index].second.toFloat() / totalSum.toFloat())
+    investments.forEachIndexed { index, values ->
+        floatValue.add(index, CIRCLE_RADIUS * investments[index].weight.toFloat() / totalSum.toFloat())
     }
 
     //TODO Move to VM
@@ -114,10 +115,11 @@ private const val VALUE_MOCK = 100
 @Preview
 @Composable
 fun PieChartComponentPreview() {
+    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
     PieChartComponent(
-        data = persistentListOf(
-            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
-            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+        investments = persistentListOf(
+            investmentMock,
+            investmentMock,
         ),
     )
 }
