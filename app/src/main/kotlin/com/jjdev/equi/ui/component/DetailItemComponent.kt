@@ -1,4 +1,4 @@
-package com.jjdev.equi.ui
+package com.jjdev.equi.ui.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -18,19 +18,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.shimmerLoadingAnimation
 import com.jjdev.equi.core.ui.theme.PortfolioDeltaTypography
 import com.jjdev.equi.core.ui.theme.dimens
 import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.ui.PieChartColor
+import com.jjdev.equi.ui.preview.DetailItemPreviewProvider
 
 @Composable
 fun DetailItemComponent(
     investment: Investment,
-    color: Color,
+    pieChartColor: PieChartColor,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
@@ -50,7 +52,7 @@ fun DetailItemComponent(
             Box(
                 modifier = Modifier
                     .background(
-                        color = color,
+                        color = pieChartColor.color,
                         shape = RoundedCornerShape(MaterialTheme.dimens.cornerRadius)
                     )
                     .size(MaterialTheme.dimens.extraLarge)
@@ -96,16 +98,14 @@ fun DetailItemComponent(
     }
 }
 
-private const val TICKER_MOCK = "EGU"
-private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100
-
 @Preview
 @Composable
-fun DetailItemComponentPreview() {
-    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+fun DetailItemComponentPreview(
+    @PreviewParameter(DetailItemPreviewProvider::class)
+    detailItemPreviewModel: DetailItemPreviewProvider.DetailItemPreviewModel,
+) {
     DetailItemComponent(
-        investment = investmentMock,
-        color = PieChartColors.RED.color,
+        investment = detailItemPreviewModel.investment,
+        pieChartColor = detailItemPreviewModel.pieChartColor,
     )
 }

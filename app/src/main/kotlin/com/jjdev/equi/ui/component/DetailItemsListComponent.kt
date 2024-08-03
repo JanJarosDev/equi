@@ -1,20 +1,20 @@
-package com.jjdev.equi.ui
+package com.jjdev.equi.ui.component
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.ui.PieChartColor
+import com.jjdev.equi.ui.preview.DetailItemsListPreviewProvider
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
-import kotlinx.collections.immutable.toPersistentList
 
 @Composable
-fun DetailsListComponent(
+fun DetailItemsListComponent(
     investments: ImmutableList<Investment>,
-    colors: ImmutableList<Color>,
+    pieChartColors: ImmutableList<PieChartColor>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
@@ -26,26 +26,21 @@ fun DetailsListComponent(
         investments.forEachIndexed { index, value ->
             DetailItemComponent(
                 investment = value,
-                color = colors[index],
+                pieChartColor = pieChartColors[index],
                 isLoading = isLoading,
             )
         }
     }
 }
 
-private const val TICKER_MOCK = "EGU"
-private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100
-
 @Preview
 @Composable
-fun DetailsListComponentPreview() {
-    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
-    DetailsListComponent(
-        investments = persistentListOf(
-            investmentMock,
-            investmentMock,
-        ),
-        colors = PieChartColors.entries.map { it.color }.toPersistentList()
+fun DetailsListComponentPreview(
+    @PreviewParameter(DetailItemsListPreviewProvider::class)
+    detailItemsListPreviewModel: DetailItemsListPreviewProvider.DetailItemsListPreviewModel,
+) {
+    DetailItemsListComponent(
+        investments = detailItemsListPreviewModel.investments,
+        pieChartColors = detailItemsListPreviewModel.pieChartColors,
     )
 }
