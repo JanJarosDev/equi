@@ -31,6 +31,7 @@ import androidx.compose.ui.window.Dialog
 import com.jjdev.equi.core.ui.theme.dimens
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
+import com.jjdev.equi.dashboard.presentation.model.Investment
 import com.jjdev.equi.dashboard.presentation.model.NewInvestment
 import com.jjdev.equi.ui.DetailsListComponent
 import com.jjdev.equi.ui.PieChartColors
@@ -46,11 +47,19 @@ fun DashboardScreen(
 ) {
     val tempData = if (state.rebalancedInvestments.isNotEmpty()) {
         state.rebalancedInvestments.map {
-            Triple(it.ticker, it.percentage, it.newAmount.toInt())
+            Investment(
+                ticker = it.ticker,
+                weight = it.percentage,
+                value = it.newAmount.toInt(),
+            )
         }.toPersistentList()
     } else {
         state.investments.map {
-            Triple(it.ticker, it.percentage, 0)
+            Investment(
+                ticker = it.ticker,
+                weight = it.percentage,
+                value = 0
+            )
         }.toPersistentList()
     }
 
@@ -68,8 +77,8 @@ fun DashboardScreen(
             .padding(top = MaterialTheme.dimens.tripleExtraLarge)
             .fillMaxSize()
     ) {
-        PieChartComponent(data = tempData, isLoading = state.isLoading)
-        DetailsListComponent(data = tempData, colors = tempColors, isLoading = state.isLoading)
+        PieChartComponent(investments = tempData, isLoading = state.isLoading)
+        DetailsListComponent(investments = tempData, colors = tempColors, isLoading = state.isLoading)
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = { sendEvent(DashboardEvent.UpdateDialog(show = true)) },
