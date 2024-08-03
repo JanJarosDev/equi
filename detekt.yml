@@ -15,5 +15,5 @@ naming:
 style:
   UnusedPrivateMember:
     active: true
-    ignoreOverridden: true
-    excludeAnnotatedPropertiesOrFunctions: "Preview"
+    ignoreAnnotated:
+      - "Preview"
