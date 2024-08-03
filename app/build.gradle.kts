@@ -13,6 +13,7 @@ android {
     defaultConfig {
         applicationId = "com.jjdev.equi"
         minSdk = MIN_SDK_VERSION
+        targetSdk = TARGET_SDK_VERSION
         versionCode = VersioningUtils.generateVersionCode()
         versionName = VersioningUtils.getVersionFromTag(project)
 
