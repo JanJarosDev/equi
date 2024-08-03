@@ -33,9 +33,9 @@ import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEve
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
 import com.jjdev.equi.dashboard.presentation.model.Investment
 import com.jjdev.equi.dashboard.presentation.model.NewInvestment
-import com.jjdev.equi.ui.DetailsListComponent
-import com.jjdev.equi.ui.PieChartColors
-import com.jjdev.equi.ui.PieChartComponent
+import com.jjdev.equi.ui.component.DetailItemsListComponent
+import com.jjdev.equi.ui.PieChartColor
+import com.jjdev.equi.ui.component.PieChartComponent
 import kotlinx.collections.immutable.toPersistentList
 
 @Composable
@@ -63,7 +63,7 @@ fun DashboardScreen(
         }.toPersistentList()
     }
 
-    val tempColors = PieChartColors.entries.map { it.color }.toPersistentList()
+    val tempColors = PieChartColor.entries.toPersistentList()
 
 
     if (state.dialogShown) {
@@ -78,7 +78,7 @@ fun DashboardScreen(
             .fillMaxSize()
     ) {
         PieChartComponent(investments = tempData, isLoading = state.isLoading)
-        DetailsListComponent(investments = tempData, colors = tempColors, isLoading = state.isLoading)
+        DetailItemsListComponent(investments = tempData, pieChartColors = tempColors, isLoading = state.isLoading)
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = { sendEvent(DashboardEvent.UpdateDialog(show = true)) },
