@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.screenshot)
     alias(libs.plugins.kapt)
 }
 
@@ -49,6 +50,11 @@ android {
     hilt {
         enableAggregatingTask = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.4"
+    }
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -82,4 +88,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     testRuntimeOnly(libs.junit.jupiter.engine)
     testImplementation(libs.kotlin.test.junit5)
+
+    //Testing
+    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
 }

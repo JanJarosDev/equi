@@ -26,6 +26,7 @@ kspVersion = "2.0.0-1.0.24"
 lifecycleVersion = "2.8.4"
 lifecycleCompose = "2.8.4"
 material3AndroidVersion = "1.2.1"
+screenshotVersion = "0.0.1-alpha03"
 timberVersion = "5.0.1"
 uiGraphicsAndroidVersion = "1.6.8"
 
@@ -76,3 +77,4 @@ jetbrains-kotlinx-kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "k
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kaptVersion"}
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
 merge-sarif = { id = "merge-sarif", version.ref = "collectSarifVersion" }
+screenshot = { id = "com.android.compose.screenshot", version.ref = "screenshotVersion"}
