@@ -6,13 +6,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.jjdev.equi.dashboard.presentation.model.Investment
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 
 @Composable
 fun DetailsListComponent(
-    data: ImmutableList<Triple<String, Int, Int>>,
+    investments: ImmutableList<Investment>,
     colors: ImmutableList<Color>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
@@ -22,9 +23,9 @@ fun DetailsListComponent(
         modifier = modifier
             .fillMaxWidth()
     ) {
-        data.forEachIndexed { index, value ->
+        investments.forEachIndexed { index, value ->
             DetailItemComponent(
-                data = value,
+                investment = value,
                 color = colors[index],
                 isLoading = isLoading,
             )
@@ -39,10 +40,11 @@ private const val VALUE_MOCK = 100
 @Preview
 @Composable
 fun DetailsListComponentPreview() {
+    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
     DetailsListComponent(
-        data = persistentListOf(
-            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
-            Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+        investments = persistentListOf(
+            investmentMock,
+            investmentMock,
         ),
         colors = PieChartColors.entries.map { it.color }.toPersistentList()
     )

@@ -25,13 +25,14 @@ import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.shimmerLoadingAnimation
 import com.jjdev.equi.core.ui.theme.PortfolioDeltaTypography
 import com.jjdev.equi.core.ui.theme.dimens
+import com.jjdev.equi.dashboard.presentation.model.Investment
 
 @Composable
 fun DetailItemComponent(
-    data: Triple<String, Int, Int>,
+    investment: Investment,
     color: Color,
-    isLoading: Boolean = false,
     modifier: Modifier = Modifier,
+    isLoading: Boolean = false,
 ) {
     Surface(
         modifier = modifier
@@ -59,19 +60,19 @@ fun DetailItemComponent(
                     .padding(start = MaterialTheme.dimens.small)
             ) {
                 Text(
-                    text = data.first,
+                    text = investment.ticker,
                     style = PortfolioDeltaTypography.labelLarge,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
                 Text(
-                    text = data.second.toString(),
+                    text = investment.weight.toString(),
                     style = PortfolioDeltaTypography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "----> " + data.third.toString(),
+                text = "----> " + investment.value.toString(),
                 style = PortfolioDeltaTypography.titleLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -102,9 +103,9 @@ private const val VALUE_MOCK = 100
 @Preview
 @Composable
 fun DetailItemComponentPreview() {
-
+    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
     DetailItemComponent(
-        data = Triple(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK),
-        color = PieChartColors.RED.color
+        investment = investmentMock,
+        color = PieChartColors.RED.color,
     )
 }
