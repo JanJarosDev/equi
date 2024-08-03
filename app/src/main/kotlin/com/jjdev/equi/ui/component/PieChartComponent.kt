@@ -1,4 +1,4 @@
-package com.jjdev.equi.ui
+package com.jjdev.equi.ui.component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
@@ -22,12 +22,14 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
 import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.ui.PieChartColor
+import com.jjdev.equi.ui.preview.PieChartPreviewProvider
 import kotlinx.collections.immutable.ImmutableList
-import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.launch
 
 private const val CIRCLE_RADIUS = 360
@@ -48,7 +50,10 @@ fun PieChartComponent(
 
     //TODO Move to VM
     investments.forEachIndexed { index, values ->
-        floatValue.add(index, CIRCLE_RADIUS * investments[index].weight.toFloat() / totalSum.toFloat())
+        floatValue.add(
+            index,
+            CIRCLE_RADIUS * investments[index].weight.toFloat() / totalSum.toFloat()
+        )
     }
 
     //TODO Move to VM
@@ -91,7 +96,7 @@ fun PieChartComponent(
                 floatValue.forEachIndexed { index, value ->
                     rotate(degrees = angle.value) {
                         drawArc(
-                            color = PieChartColors.entries[index].color,
+                            color = PieChartColor.entries[index].color,
                             startAngle = lastValue,
                             sweepAngle = value,
                             useCenter = false,
@@ -108,18 +113,13 @@ fun PieChartComponent(
     }
 }
 
-private const val TICKER_MOCK = "EGU"
-private const val PERCENTAGE_MOCK = 10
-private const val VALUE_MOCK = 100
-
 @Preview
 @Composable
-fun PieChartComponentPreview() {
-    val investmentMock = Investment(TICKER_MOCK, PERCENTAGE_MOCK, VALUE_MOCK)
+private fun PieChartComponentPreview(
+    @PreviewParameter(PieChartPreviewProvider::class)
+    pieChartPreviewModel: PieChartPreviewProvider.PieChartPreviewModel,
+) {
     PieChartComponent(
-        investments = persistentListOf(
-            investmentMock,
-            investmentMock,
-        ),
+        investments = pieChartPreviewModel.investments,
     )
 }
