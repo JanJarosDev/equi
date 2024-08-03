@@ -115,7 +115,7 @@ fun PieChartComponent(
 
 @Preview
 @Composable
-fun PieChartComponentPreview(
+private fun PieChartComponentPreview(
     @PreviewParameter(PieChartPreviewProvider::class)
     pieChartPreviewModel: PieChartPreviewProvider.PieChartPreviewModel,
 ) {

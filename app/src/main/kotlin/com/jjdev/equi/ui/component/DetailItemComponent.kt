@@ -100,7 +100,7 @@ fun DetailItemComponent(
 
 @Preview
 @Composable
-fun DetailItemComponentPreview(
+private fun DetailItemComponentPreview(
     @PreviewParameter(DetailItemPreviewProvider::class)
     detailItemPreviewModel: DetailItemPreviewProvider.DetailItemPreviewModel,
 ) {

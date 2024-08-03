@@ -35,7 +35,7 @@ fun DetailItemsListComponent(
 
 @Preview
 @Composable
-fun DetailsListComponentPreview(
+private fun DetailsListComponentPreview(
     @PreviewParameter(DetailItemsListPreviewProvider::class)
     detailItemsListPreviewModel: DetailItemsListPreviewProvider.DetailItemsListPreviewModel,
 ) {
