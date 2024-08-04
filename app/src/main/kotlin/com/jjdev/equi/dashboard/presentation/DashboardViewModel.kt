@@ -8,11 +8,13 @@ import com.jjdev.equi.dashboard.domain.model.Investment
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEffect
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
-import com.jjdev.equi.dashboard.presentation.model.NewInvestment
-import com.jjdev.equi.dashboard.presentation.model.RebalancedInvestment
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.math.BigDecimal
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,40 +28,40 @@ class DashboardViewModel @Inject constructor(
         Timber.i("Initializing DashboardViewModel")
     }
 
-    fun onRebalanceClick(amountToInvest: Double, investments: List<NewInvestment>) {
+    fun onRebalanceClick(amountToInvest: BigDecimal, investments: List<InvestmentUIModel>) {
         sendEvent(DashboardEvent.UpdateRebalanceLoading(isLoading = true))
         viewModelScope.launch {
-            rebalanceUseCase(amountToInvest to investments.toInvestmentList()).onSuccess {
+            rebalanceUseCase(amountToInvest to investments.toInvestmentDomainModelList()).onSuccess {
                 Timber.i("Rebalanced investments: $it")
-                sendEvent(DashboardEvent.Rebalance(it.toRebalancedInvestmentList()))
+                sendEvent(DashboardEvent.Rebalance(it.toInvestmentUIModel()))
             }
         }
     }
 
-    private fun NewInvestment.toInvestment(): Investment {
+    private fun InvestmentUIModel.toInvestmentDomainModel(): Investment {
         return Investment(
             ticker = this.ticker,
-            weight = this.percentage.toDouble() / 100,
-            currentValue = this.amount,
-            investedAmount = null,
+            weight = BigDecimal.valueOf(this.weight / 100),
+            currentValue = this.value,
+            valueToInvest = null,
             targetValue = null
         )
     }
 
-    private fun List<NewInvestment>.toInvestmentList(): List<Investment> {
-        return this.map { it.toInvestment() }
+    private fun List<InvestmentUIModel>.toInvestmentDomainModelList(): ImmutableList<Investment> {
+        return this.map { it.toInvestmentDomainModel() }.toPersistentList()
     }
 
-    private fun Investment.toRebalancedInvestment(): RebalancedInvestment {
-        return RebalancedInvestment(
+    private fun Investment.toInvestmentUIModel(): InvestmentUIModel {
+        return InvestmentUIModel(
             ticker = this.ticker,
-            percentage = (this.weight * 100).toInt(),
-            amount = this.currentValue,
-            newAmount = this.investedAmount ?: 0.0
+            weight = this.weight.toDouble(),
+            value = this.currentValue,
+            valueToInvest = this.valueToInvest ?: BigDecimal.ZERO
         )
     }
 
-    private fun List<Investment>.toRebalancedInvestmentList(): List<RebalancedInvestment> {
-        return this.map { it.toRebalancedInvestment() }
+    private fun List<Investment>.toInvestmentUIModel(): ImmutableList<InvestmentUIModel> {
+        return this.map { it.toInvestmentUIModel() }.toPersistentList()
     }
 }

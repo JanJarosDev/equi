@@ -1,7 +1,7 @@
 package com.jjdev.equi.ui.preview
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import com.jjdev.equi.ui.PieChartColor
 import com.jjdev.equi.ui.preview.helper.InvestmentPreviewParameterHelper
 
@@ -9,7 +9,7 @@ class DetailItemPreviewProvider :
     PreviewParameterProvider<DetailItemPreviewProvider.DetailItemPreviewModel> {
 
     data class DetailItemPreviewModel(
-        val investment: Investment,
+        val investment: InvestmentUIModel,
         val pieChartColor: PieChartColor,
     )
 

@@ -26,7 +26,7 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
-import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import com.jjdev.equi.ui.PieChartColor
 import com.jjdev.equi.ui.preview.PieChartPreviewProvider
 import kotlinx.collections.immutable.ImmutableList
@@ -37,7 +37,7 @@ private const val LOADING_ANIMATION_DURATION = 3000
 
 @Composable
 fun PieChartComponent(
-    investments: ImmutableList<Investment>,
+    investments: ImmutableList<InvestmentUIModel>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {

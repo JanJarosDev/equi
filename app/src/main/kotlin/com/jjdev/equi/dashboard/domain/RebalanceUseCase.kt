@@ -6,17 +6,18 @@ import com.jjdev.equi.core.base.domain.UseCase
 import com.jjdev.equi.dashboard.domain.model.Investment
 import kotlinx.coroutines.Dispatchers
 import timber.log.Timber
+import java.math.BigDecimal
+import java.math.RoundingMode
 import javax.inject.Inject
-import kotlin.math.floor
 
-private const val INCREMENT_VALUE = 0.1
+private val INCREMENT_VALUE = BigDecimal("0.1")
 
 class RebalanceUseCase @Inject constructor() :
-    UseCase<Pair<Double, List<Investment>>, List<Investment>, AppError?>(
+    UseCase<Pair<BigDecimal, List<Investment>>, List<Investment>, AppError?>(
         dispatcher = Dispatchers.Default
     ) {
 
-    override suspend fun execute(parameters: Pair<Double, List<Investment>>): Result<List<Investment>, AppError?> {
+    override suspend fun execute(parameters: Pair<BigDecimal, List<Investment>>): Result<List<Investment>, AppError?> {
         val (totalAmountToInvest, investments) = parameters
 
         Timber.i("Starting rebalance with totalAmountToInvest: $totalAmountToInvest and investments: $investments")
@@ -28,15 +29,17 @@ class RebalanceUseCase @Inject constructor() :
 
         var remainingAmount = totalAmountToInvest
 
-        while (remainingAmount > 0.0) {
-            remainingAmount -= addIncrementalFunds(INCREMENT_VALUE, investmentsWithIndex)
+        while (remainingAmount > BigDecimal.ZERO) {
+            remainingAmount =
+                remainingAmount.subtract(addIncrementalFunds(investments = investmentsWithIndex))
         }
 
         val finalInvestments = investmentsWithIndex
             .map {
                 it.copy(
                     investment = it.investment.copy(
-                        investedAmount = floor(it.investment.investedAmount ?: 0.0),
+                        valueToInvest = it.investment.valueToInvest?.setScale(0, RoundingMode.FLOOR)
+                            ?: BigDecimal.ZERO,
                         targetValue = it.investment.currentValue
                     ),
                 )
@@ -50,22 +53,24 @@ class RebalanceUseCase @Inject constructor() :
     }
 
     private fun addIncrementalFunds(
-        increment: Double,
+        increment: BigDecimal = INCREMENT_VALUE,
         investments: MutableList<IndexedInvestment>,
-    ): Double {
+    ): BigDecimal {
         // Calculate the current total value including the increment
         val totalValue = investments.sumOf { it.investment.currentValue } + increment
 
         // Find the most underweighted investment
         val targetInvestment = investments.maxByOrNull {
-            val currentWeight = it.investment.currentValue / totalValue
-            it.investment.weight - currentWeight
-        } ?: return 0.0
+            val currentWeight =
+                it.investment.currentValue.divide(totalValue, 10, RoundingMode.HALF_UP)
+            it.investment.weight.subtract(currentWeight)
+        } ?: return BigDecimal.ZERO
 
         // Allocate the incremental fund to the most underweighted investment
-        targetInvestment.investment.investedAmount =
-            (targetInvestment.investment.investedAmount ?: 0.0) + increment
-        targetInvestment.investment.currentValue += increment
+        targetInvestment.investment.valueToInvest =
+            (targetInvestment.investment.valueToInvest ?: BigDecimal.ZERO).add(increment)
+        targetInvestment.investment.currentValue =
+            targetInvestment.investment.currentValue.add(increment)
         Timber.i(
             "Added $increment to ${targetInvestment.investment.ticker}, " +
                     "new currentValue: ${targetInvestment.investment.currentValue}"
@@ -78,4 +83,3 @@ class RebalanceUseCase @Inject constructor() :
         val investment: Investment,
     )
 }
-
