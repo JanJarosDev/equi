@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.shimmerLoadingAnimation
 import com.jjdev.equi.core.ui.theme.PortfolioDeltaTypography
 import com.jjdev.equi.core.ui.theme.dimens
-import com.jjdev.equi.dashboard.presentation.model.Investment
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import com.jjdev.equi.ui.PieChartColor
 import com.jjdev.equi.ui.preview.DetailItemPreviewProvider
 
 @Composable
 fun DetailItemComponent(
-    investment: Investment,
+    investment: InvestmentUIModel,
     pieChartColor: PieChartColor,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
@@ -74,7 +74,7 @@ fun DetailItemComponent(
             }
             Spacer(modifier = Modifier.weight(1f))
             Text(
-                text = "----> " + investment.value.toString(),
+                text = investment.valueToInvest.toString(),
                 style = PortfolioDeltaTypography.titleLarge,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
