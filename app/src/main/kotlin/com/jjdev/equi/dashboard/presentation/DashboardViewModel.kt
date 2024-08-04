@@ -17,6 +17,8 @@ import timber.log.Timber
 import java.math.BigDecimal
 import javax.inject.Inject
 
+private const val PERCENTAGE_DIVISOR = 100
+
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
     private val rebalanceUseCase: RebalanceUseCase,
@@ -41,7 +43,7 @@ class DashboardViewModel @Inject constructor(
     private fun InvestmentUIModel.toInvestmentDomainModel(): Investment {
         return Investment(
             ticker = this.ticker,
-            weight = BigDecimal.valueOf(this.weight / 100),
+            weight = BigDecimal.valueOf(this.weight / PERCENTAGE_DIVISOR),
             currentValue = this.value,
             valueToInvest = null,
             targetValue = null
