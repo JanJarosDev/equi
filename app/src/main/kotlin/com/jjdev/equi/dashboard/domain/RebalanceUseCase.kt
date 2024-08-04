@@ -11,6 +11,7 @@ import java.math.RoundingMode
 import javax.inject.Inject
 
 private val INCREMENT_VALUE = BigDecimal("0.1")
+private const val BIG_DECIMAL_DIVISION_SCALE = 10
 
 class RebalanceUseCase @Inject constructor() :
     UseCase<Pair<BigDecimal, List<Investment>>, List<Investment>, AppError?>(
@@ -62,7 +63,7 @@ class RebalanceUseCase @Inject constructor() :
         // Find the most underweighted investment
         val targetInvestment = investments.maxByOrNull {
             val currentWeight =
-                it.investment.currentValue.divide(totalValue, 10, RoundingMode.HALF_UP)
+                it.investment.currentValue.divide(totalValue, BIG_DECIMAL_DIVISION_SCALE, RoundingMode.HALF_UP)
             it.investment.weight.subtract(currentWeight)
         } ?: return BigDecimal.ZERO
 
