@@ -2,8 +2,10 @@ package com.jjdev.equi.dashboard.presentation
 
 import androidx.compose.runtime.Immutable
 import com.jjdev.equi.core.base.presentation.Reducer
-import com.jjdev.equi.dashboard.presentation.model.NewInvestment
-import com.jjdev.equi.dashboard.presentation.model.RebalancedInvestment
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toPersistentList
 
 class DashboardScreenReducer :
     Reducer<DashboardScreenReducer.DashboardState,
@@ -13,8 +15,8 @@ class DashboardScreenReducer :
     sealed class DashboardEvent : Reducer.ViewEvent {
         data class UpdateRebalanceLoading(val isLoading: Boolean) : DashboardEvent()
         data class UpdateDialog(val show: Boolean) : DashboardEvent()
-        data class AddInvestment(val newInvestment: NewInvestment) : DashboardEvent()
-        data class Rebalance(val rebalancedInvestments: List<RebalancedInvestment>) :
+        data class AddInvestment(val newInvestment: InvestmentUIModel) : DashboardEvent()
+        data class Rebalance(val rebalancedInvestments: ImmutableList<InvestmentUIModel>) :
             DashboardEvent()
     }
 
@@ -25,22 +27,20 @@ class DashboardScreenReducer :
     data class DashboardState(
         val isLoading: Boolean,
         val dialogShown: Boolean,
-        val investments: List<NewInvestment>,
-        val rebalancedInvestments: List<RebalancedInvestment>,
+        val investments: ImmutableList<InvestmentUIModel>,
     ) : Reducer.ViewState {
         companion object {
             fun initial(): DashboardState = DashboardState(
                 isLoading = false,
                 dialogShown = false,
-                investments = emptyList(),
-                rebalancedInvestments = emptyList()
+                investments = persistentListOf(),
             )
         }
     }
 
     override fun reduce(
         previousState: DashboardState,
-        event: DashboardEvent
+        event: DashboardEvent,
     ): Pair<DashboardState, DashboardEffect?> {
         return when (event) {
             is DashboardEvent.UpdateRebalanceLoading -> {
@@ -58,13 +58,14 @@ class DashboardScreenReducer :
 
             is DashboardEvent.AddInvestment -> {
                 previousState.copy(
-                    investments = previousState.investments + event.newInvestment
+                    investments = (previousState.investments + event.newInvestment).toPersistentList()
                 ) to null
             }
 
             is DashboardEvent.Rebalance -> {
                 previousState.copy(
-                    rebalancedInvestments = event.rebalancedInvestments
+                    investments = event.rebalancedInvestments,
+                    isLoading = false
                 ) to null
             }
         }

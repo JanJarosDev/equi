@@ -31,40 +31,22 @@ import androidx.compose.ui.window.Dialog
 import com.jjdev.equi.core.ui.theme.dimens
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
 import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
-import com.jjdev.equi.dashboard.presentation.model.Investment
-import com.jjdev.equi.dashboard.presentation.model.NewInvestment
-import com.jjdev.equi.ui.component.DetailItemsListComponent
+import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import com.jjdev.equi.ui.PieChartColor
+import com.jjdev.equi.ui.component.DetailItemsListComponent
 import com.jjdev.equi.ui.component.PieChartComponent
 import kotlinx.collections.immutable.toPersistentList
+import java.math.BigDecimal
 
 @Composable
 fun DashboardScreen(
     state: DashboardState,
     sendEvent: (event: DashboardEvent) -> Unit,
-    onRebalanceClick: (amountToInvest: Double, investments: List<NewInvestment>) -> Unit,
+    onRebalanceClick: (amountToInvest: BigDecimal, investments: List<InvestmentUIModel>) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val tempData = if (state.rebalancedInvestments.isNotEmpty()) {
-        state.rebalancedInvestments.map {
-            Investment(
-                ticker = it.ticker,
-                weight = it.percentage,
-                value = it.newAmount.toInt(),
-            )
-        }.toPersistentList()
-    } else {
-        state.investments.map {
-            Investment(
-                ticker = it.ticker,
-                weight = it.percentage,
-                value = 0
-            )
-        }.toPersistentList()
-    }
 
     val tempColors = PieChartColor.entries.toPersistentList()
-
 
     if (state.dialogShown) {
         AddDialog(
@@ -77,8 +59,12 @@ fun DashboardScreen(
             .padding(top = MaterialTheme.dimens.tripleExtraLarge)
             .fillMaxSize()
     ) {
-        PieChartComponent(investments = tempData, isLoading = state.isLoading)
-        DetailItemsListComponent(investments = tempData, pieChartColors = tempColors, isLoading = state.isLoading)
+        PieChartComponent(investments = state.investments, isLoading = state.isLoading)
+        DetailItemsListComponent(
+            investments = state.investments,
+            pieChartColors = tempColors,
+            isLoading = state.isLoading
+        )
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = { sendEvent(DashboardEvent.UpdateDialog(show = true)) },
@@ -104,7 +90,12 @@ fun DashboardScreen(
             modifier = Modifier.fillMaxWidth()
         )
         Button(
-            onClick = { onRebalanceClick(amount.toDouble(), state.investments) },
+            onClick = {
+                onRebalanceClick(
+                    BigDecimal.valueOf(amount.toDouble()),
+                    state.investments
+                )
+            },
             enabled = !state.isLoading,
             modifier = Modifier
                 .padding(bottom = MaterialTheme.dimens.large)
@@ -129,7 +120,7 @@ fun AddDialog(
     ) {
         var ticker by remember { mutableStateOf("") }
         var value by remember { mutableStateOf("") }
-        var percentage by remember { mutableStateOf("") }
+        var weight by remember { mutableStateOf("") }
         Surface(shape = MaterialTheme.shapes.medium, modifier = modifier) {
             Column {
                 Column(Modifier.padding(MaterialTheme.dimens.large)) {
@@ -162,9 +153,9 @@ fun AddDialog(
                     )
                     Text("Percentage")
                     TextField(
-                        value = percentage,
+                        value = weight,
                         onValueChange = {
-                            percentage = it
+                            weight = it
                         },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number
@@ -183,16 +174,16 @@ fun AddDialog(
                     Button(onClick = {
                         sendEvent(
                             DashboardEvent.AddInvestment(
-                                NewInvestment(
+                                InvestmentUIModel(
                                     ticker,
-                                    percentage.toInt(),
-                                    value.toDouble()
+                                    weight.toDouble(),
+                                    BigDecimal.valueOf(value.toDouble())
                                 )
                             )
                         )
                         ticker = ""
                         value = ""
-                        percentage = ""
+                        weight = ""
                     }) {
                         Text("Add")
                     }
