@@ -1,7 +1,8 @@
 package com.jjdev.equi.ui.component
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,14 +19,10 @@ fun DetailItemsListComponent(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
-    //Todo lazycolumn
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-    ) {
-        investments.forEachIndexed { index, value ->
+    LazyColumn(modifier = modifier.fillMaxWidth()) {
+        itemsIndexed(investments) { index, investment ->
             DetailItemComponent(
-                investment = value,
+                investment = investment,
                 pieChartColor = pieChartColors[index],
                 isLoading = isLoading,
             )
