@@ -15,7 +15,6 @@ import kotlinx.collections.immutable.ImmutableList
 @Composable
 fun DetailItemsListComponent(
     investments: ImmutableList<InvestmentUIModel>,
-    pieChartColors: ImmutableList<PieChartColor>,
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
@@ -23,7 +22,7 @@ fun DetailItemsListComponent(
         itemsIndexed(investments) { index, investment ->
             DetailItemComponent(
                 investment = investment,
-                pieChartColor = pieChartColors[index],
+                pieChartColor = PieChartColor.entries[index],
                 isLoading = isLoading,
             )
         }
@@ -38,6 +37,5 @@ private fun DetailsListComponentPreview(
 ) {
     DetailItemsListComponent(
         investments = detailItemsListPreviewModel.investments,
-        pieChartColors = detailItemsListPreviewModel.pieChartColors,
     )
 }
