@@ -6,7 +6,6 @@ import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +22,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.jjdev.equi.core.ui.theme.dimens
 import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
@@ -32,8 +30,10 @@ import com.jjdev.equi.ui.preview.PieChartPreviewProvider
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.launch
 
-private const val CIRCLE_RADIUS = 360
+private const val FULL_CIRCLE_DEGREES = 360
 private const val LOADING_ANIMATION_DURATION = 3000
+private const val CIRCLE_OUTER_RADIUS = 280
+private const val CHART_BAR_WIDTH = 35
 
 @Composable
 fun PieChartComponent(
@@ -41,71 +41,60 @@ fun PieChartComponent(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
 ) {
-    val outerRadius = 280.dp
-    val chartBarWidth: Dp = 35.dp
+    val investmentsWeightsSum = investments.sumOf { it.weight }
+    val pieChartSegments = mutableListOf<Float>()
+    var lastSegmentEndingValueHolder = 0f
 
-    //TODO Move to VM
-    val totalSum = investments.sumOf { it.weight }
-    val floatValue = mutableListOf<Float>()
-
-    //TODO Move to VM
-    investments.forEachIndexed { index, values ->
-        floatValue.add(
-            index,
-            CIRCLE_RADIUS * investments[index].weight.toFloat() / totalSum.toFloat()
-        )
+    val animationAngle = remember {
+        Animatable(0f)
     }
 
-    //TODO Move to VM
-    var lastValue = 0f
-
-    val angle = remember {
-        Animatable(0f)
+    investments.forEachIndexed { index, _ ->
+        pieChartSegments.add(
+            index,
+            FULL_CIRCLE_DEGREES * investments[index].weight.toFloat() / investmentsWeightsSum.toFloat()
+        )
     }
 
     LaunchedEffect(isLoading) {
         if (isLoading) {
             launch {
-                angle.animateTo(
-                    targetValue = 360f,
+                animationAngle.animateTo(
+                    targetValue = FULL_CIRCLE_DEGREES.toFloat(),
                     animationSpec = infiniteRepeatable(
                         animation = tween(LOADING_ANIMATION_DURATION, easing = LinearEasing),
-                        repeatMode = RepeatMode.Restart
-                    )
+                        repeatMode = RepeatMode.Restart,
+                    ),
                 )
             }
         } else {
-            angle.animateTo(0f)
+            animationAngle.animateTo(0f)
         }
     }
 
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background),
-    ) {
+    Column(modifier = modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier.fillMaxWidth(),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Canvas(
                 modifier = Modifier
-                    .size(outerRadius)
-                    .padding(MaterialTheme.dimens.large)
+                    .size(CIRCLE_OUTER_RADIUS.dp)
+                    .padding(MaterialTheme.dimens.large),
             ) {
-                floatValue.forEachIndexed { index, value ->
-                    rotate(degrees = angle.value) {
+                pieChartSegments.forEachIndexed { index, value ->
+                    rotate(degrees = animationAngle.value) {
                         drawArc(
                             color = PieChartColor.entries[index].color,
-                            startAngle = lastValue,
+                            startAngle = lastSegmentEndingValueHolder,
                             sweepAngle = value,
                             useCenter = false,
                             style = Stroke(
-                                width = chartBarWidth.toPx(),
-                                cap = StrokeCap.Butt
-                            )
+                                width = CHART_BAR_WIDTH.dp.toPx(),
+                                cap = StrokeCap.Butt,
+                            ),
                         )
-                        lastValue += value
+                        lastSegmentEndingValueHolder += value
                     }
                 }
             }
