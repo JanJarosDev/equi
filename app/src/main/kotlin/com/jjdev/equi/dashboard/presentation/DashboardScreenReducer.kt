@@ -50,6 +50,7 @@ class DashboardScreenReducer :
         }
     }
 
+    @Suppress("LongMethod")
     override fun reduce(
         previousState: DashboardState,
         event: DashboardEvent,
