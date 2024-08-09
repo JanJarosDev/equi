@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Equi: Investment Rebalancer</string>
+    <string name="dashboard_button_add_investment">Add investment</string>
+    <string name="dashboard_label_amount_to_invest">Amount to invest</string>
+    <string name="dashboard_button_rebalance">Rebalance</string>
+    <string name="add_investment_dialog_label_add_investment">Add investment</string>
+    <string name="add_investment_dialog_label_ticker">Ticker</string>
+    <string name="add_investment_dialog_label_value">Value</string>
+    <string name="add_investment_dialog_label_percentage">Percentage</string>
+    <string name="add_investment_dialog_button_close">Close</string>
+    <string name="add_investment_dialog_button_add">Add</string>
 </resources>
