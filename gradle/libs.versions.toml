@@ -26,6 +26,7 @@ kspVersion = "2.0.10-1.0.24"
 lifecycleVersion = "2.8.4"
 lifecycleCompose = "2.8.4"
 material3AndroidVersion = "1.2.1"
+mockKVersion = "1.12.0"
 timberVersion = "5.0.1"
 uiGraphicsAndroidVersion = "1.6.8"
 
@@ -59,6 +60,7 @@ junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", v
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiterVersion" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlinVersion" }
 kotlinx-collections =  { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockKVersion"}
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agpVersion" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektVersion" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }

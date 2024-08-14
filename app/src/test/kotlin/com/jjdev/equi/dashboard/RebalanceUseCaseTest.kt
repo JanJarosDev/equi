@@ -1,4 +1,4 @@
-package com.jjdev.equi
+package com.jjdev.equi.dashboard
 
 import com.jjdev.equi.core.base.domain.onError
 import com.jjdev.equi.core.base.domain.onSuccess
