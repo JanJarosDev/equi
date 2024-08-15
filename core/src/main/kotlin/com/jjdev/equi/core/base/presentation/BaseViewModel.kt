@@ -46,6 +46,8 @@ abstract class BaseViewModel<State : Reducer.ViewState, Event : Reducer.ViewEven
         if (BuildConfig.DEBUG && success) {
             timeCapsule.addState(newState)
         }
+
+        _event.tryEmit(event)
     }
 
     fun sendEventForEffect(event: Event) {
