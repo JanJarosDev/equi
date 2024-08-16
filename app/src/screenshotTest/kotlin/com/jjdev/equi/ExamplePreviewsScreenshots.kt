@@ -5,11 +5,14 @@ import com.jjdev.equi.core.ui.theme.EquiTheme
 
 class ExamplePreviewsScreenshots {
 
+/*
+    //Will be uncommented once the lib is ready :D
+    
     @Preview(showBackground = true)
     @Composable
     fun GreetingPreview() {
         EquiTheme {
             Text("Android!")
         }
-    }
+    }*/
 }
