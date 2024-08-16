@@ -25,69 +25,81 @@ import java.math.BigDecimal
 
 class DashboardViewModelTest {
 
+    private companion object {
+        const val TICKER_A = "A"
+        const val TICKER_B = "B"
+        const val TICKER_C = "C"
+        val WEIGHT_0_5: BigDecimal = BigDecimal.valueOf(0.5)
+        val WEIGHT_0_0: BigDecimal = BigDecimal.valueOf(0.0)
+        val VALUE_100: BigDecimal = BigDecimal.valueOf(100.0)
+        val VALUE_500: BigDecimal = BigDecimal.valueOf(500.0)
+        val VALUE_ZERO: BigDecimal = BigDecimal.ZERO
+        val TOTAL_VALUE_1000: BigDecimal = BigDecimal.valueOf(1000.0)
+    }
+
     private val rebalanceUseCase = mockk<RebalanceUseCase>()
     private lateinit var viewModel: DashboardViewModel
 
     private val investmentsListMock = listOf(
         Investment(
-            ticker = "A",
-            weight = BigDecimal.valueOf(0.5),
-            currentValue = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.valueOf(500.0),
+            ticker = TICKER_A,
+            weight = WEIGHT_0_5,
+            currentValue = VALUE_100,
+            valueToInvest = VALUE_500,
         ),
         Investment(
-            ticker = "B",
-            weight = BigDecimal.valueOf(0.5),
-            currentValue = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.valueOf(500.0),
+            ticker = TICKER_B,
+            weight = WEIGHT_0_5,
+            currentValue = VALUE_100,
+            valueToInvest = VALUE_500,
         ),
         Investment(
-            ticker = "C",
-            weight = BigDecimal.valueOf(0.0),
-            currentValue = BigDecimal.valueOf(100.0),
+            ticker = TICKER_C,
+            weight = WEIGHT_0_0,
+            currentValue = VALUE_100,
             valueToInvest = null,
         ),
     )
 
     private val investmentsUiModelListMock = listOf(
         InvestmentUIModel(
-            ticker = "A",
-            weight = 0.5,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.ZERO,
+            ticker = TICKER_A,
+            weight = WEIGHT_0_5.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_ZERO,
         ),
         InvestmentUIModel(
-            ticker = "B",
-            weight = 0.5,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.ZERO,
+            ticker = TICKER_B,
+            weight = WEIGHT_0_5.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_ZERO,
         ),
         InvestmentUIModel(
-            ticker = "C",
-            weight = 0.0,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.ZERO
+            ticker = TICKER_C,
+            weight = WEIGHT_0_0.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_ZERO
         ),
     )
 
     private val rebalancedInvestmentsUiModelListMock = persistentListOf(
         InvestmentUIModel(
-            ticker = "A",
-            weight = 0.5,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.valueOf(500.0),
+            ticker = TICKER_A,
+            weight = WEIGHT_0_5.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_500,
         ),
         InvestmentUIModel(
-            ticker = "B",
-            weight = 0.5,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.valueOf(500.0),
+            ticker = TICKER_B,
+            weight = WEIGHT_0_5.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_500,
         ),
         InvestmentUIModel(
-            ticker = "C",
-            weight = 0.0,
-            value = BigDecimal.valueOf(100.0),
-            valueToInvest = BigDecimal.ZERO
+            ticker = TICKER_C,
+            weight = WEIGHT_0_0.toDouble(),
+            value = VALUE_100,
+            valueToInvest = VALUE_ZERO
         ),
     )
 
@@ -111,7 +123,7 @@ class DashboardViewModelTest {
 
         viewModel.event.test {
             viewModel.onRebalanceClick(
-                BigDecimal.valueOf(1000.0),
+                TOTAL_VALUE_1000,
                 investmentsUiModelListMock,
             )
 
