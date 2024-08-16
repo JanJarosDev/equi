@@ -27,7 +27,9 @@ lifecycleVersion = "2.8.4"
 lifecycleCompose = "2.8.4"
 material3AndroidVersion = "1.2.1"
 screenshotVersion = "0.0.1-alpha03"
+mockKVersion = "1.13.2"
 timberVersion = "5.0.1"
+turbineVersion = "1.1.0"
 uiGraphicsAndroidVersion = "1.6.8"
 
 [libraries]
@@ -56,13 +58,16 @@ hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testi
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hiltVersion" }
 hilt-ext-compiler = { group = "androidx.hilt", name = "hilt-compiler", version.ref = "hiltExtVersion" }
 hilt-ext-work = { group = "androidx.hilt", name = "hilt-work", version.ref = "hiltExtVersion" }
+junit-jupiter = { group = "org.junit.jupiter", name= "junit-jupiter", version.ref = "junitJupiterVersion" }
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiterVersion" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiterVersion" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5", version.ref = "kotlinVersion" }
 kotlinx-collections =  { group = "org.jetbrains.kotlinx", name = "kotlinx-collections-immutable", version.ref = "kotlinxCollectionsVersion" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockKVersion"}
 plugin-android = { module = "com.android.tools.build:gradle", version.ref = "agpVersion" }
 plugin-detekt = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detektVersion" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timberVersion" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbineVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agpVersion" }

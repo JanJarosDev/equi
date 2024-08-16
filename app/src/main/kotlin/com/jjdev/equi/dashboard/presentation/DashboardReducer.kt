@@ -9,10 +9,10 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import java.math.BigDecimal
 
-class DashboardScreenReducer :
-    Reducer<DashboardScreenReducer.DashboardState,
-            DashboardScreenReducer.DashboardEvent,
-            DashboardScreenReducer.DashboardEffect> {
+class DashboardReducer :
+    Reducer<DashboardReducer.DashboardState,
+            DashboardReducer.DashboardEvent,
+            DashboardReducer.DashboardEffect> {
     @Immutable
     sealed class DashboardEvent : Reducer.ViewEvent {
         data class UpdateRebalanceLoading(val isLoading: Boolean) : DashboardEvent()
@@ -30,7 +30,7 @@ class DashboardScreenReducer :
     }
 
     @Immutable
-    sealed class DashboardEffect : Reducer.ViewEffect
+    object DashboardEffect : Reducer.ViewEffect
 
     @Immutable
     data class DashboardState(
@@ -93,33 +93,51 @@ class DashboardScreenReducer :
             }
 
             is DashboardEvent.UpdateDialogTicker -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        ticker = event.ticker
-                    ) ?: AddInvestmentDialogModel(
-                        ticker = event.ticker
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            ticker = event.ticker
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            ticker = event.ticker
+                        )
+                    ) to null
+                }
             }
 
             is DashboardEvent.UpdateDialogValue -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        value = event.value
-                    ) ?: AddInvestmentDialogModel(
-                        value = event.value
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            value = event.value
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            value = event.value
+                        )
+                    ) to null
+                }
             }
 
             is DashboardEvent.UpdateDialogWeight -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        weight = event.weight
-                    ) ?: AddInvestmentDialogModel(
-                        weight = event.weight
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            weight = event.weight
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            weight = event.weight
+                        )
+                    ) to null
+                }
             }
         }
     }

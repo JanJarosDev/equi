@@ -29,18 +29,22 @@ class RebalanceUseCase @Inject constructor() :
         }.toMutableList()
 
         var remainingAmount = totalAmountToInvest
+        var noFeasibleInvestments = false
 
-        while (remainingAmount > BigDecimal.ZERO) {
-            remainingAmount =
-                remainingAmount.subtract(addIncrementalFunds(investments = investmentsWithIndex))
+        while (remainingAmount > BigDecimal.ZERO && !noFeasibleInvestments) {
+            val increment = addIncrementalFunds(investments = investmentsWithIndex)
+            remainingAmount = remainingAmount.subtract(increment)
+
+            if (increment == BigDecimal.ZERO) {
+                noFeasibleInvestments = true
+            }
         }
 
         val finalInvestments = investmentsWithIndex
             .map {
                 it.copy(
                     investment = it.investment.copy(
-                        valueToInvest = it.investment.valueToInvest?.setScale(0, RoundingMode.FLOOR)
-                            ?: BigDecimal.ZERO,
+                        valueToInvest = it.investment.valueToInvest ?: BigDecimal.ZERO,
                         targetValue = it.investment.currentValue
                     ),
                 )
@@ -63,7 +67,11 @@ class RebalanceUseCase @Inject constructor() :
         // Find the most underweighted investment
         val targetInvestment = investments.maxByOrNull {
             val currentWeight =
-                it.investment.currentValue.divide(totalValue, BIG_DECIMAL_DIVISION_SCALE, RoundingMode.HALF_UP)
+                it.investment.currentValue.divide(
+                    totalValue,
+                    BIG_DECIMAL_DIVISION_SCALE,
+                    RoundingMode.HALF_UP
+                )
             it.investment.weight.subtract(currentWeight)
         } ?: return BigDecimal.ZERO
 

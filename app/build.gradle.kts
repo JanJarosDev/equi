@@ -55,7 +55,12 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
+    
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
+
+    tasks.withType(Test::class) {
+        jvmArgs("-Dnet.bytebuddy.experimental=true", "-XX:+EnableDynamicAgentLoading")
+    }
 }
 
 dependencies {
@@ -84,12 +89,12 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation(libs.junit.jupiter.api)
     testImplementation(libs.coroutines.test)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    testRuntimeOnly(libs.junit.jupiter.engine)
-    testImplementation(libs.kotlin.test.junit5)
 
     //Testing
     screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+    testImplementation(libs.mockk)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.turbine)
 }
