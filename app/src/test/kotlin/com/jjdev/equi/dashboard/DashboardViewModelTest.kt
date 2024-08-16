@@ -28,6 +28,69 @@ class DashboardViewModelTest {
     private val rebalanceUseCase = mockk<RebalanceUseCase>()
     private lateinit var viewModel: DashboardViewModel
 
+    private val investmentsListMock = listOf(
+        Investment(
+            ticker = "A",
+            weight = BigDecimal.valueOf(0.5),
+            currentValue = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.valueOf(500.0),
+        ),
+        Investment(
+            ticker = "B",
+            weight = BigDecimal.valueOf(0.5),
+            currentValue = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.valueOf(500.0),
+        ),
+        Investment(
+            ticker = "C",
+            weight = BigDecimal.valueOf(0.0),
+            currentValue = BigDecimal.valueOf(100.0),
+            valueToInvest = null,
+        ),
+    )
+
+    private val investmentsUiModelListMock = listOf(
+        InvestmentUIModel(
+            ticker = "A",
+            weight = 0.5,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.ZERO,
+        ),
+        InvestmentUIModel(
+            ticker = "B",
+            weight = 0.5,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.ZERO,
+        ),
+        InvestmentUIModel(
+            ticker = "C",
+            weight = 0.0,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.ZERO
+        ),
+    )
+
+    private val rebalancedInvestmentsUiModelListMock = persistentListOf(
+        InvestmentUIModel(
+            ticker = "A",
+            weight = 0.5,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.valueOf(500.0),
+        ),
+        InvestmentUIModel(
+            ticker = "B",
+            weight = 0.5,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.valueOf(500.0),
+        ),
+        InvestmentUIModel(
+            ticker = "C",
+            weight = 0.0,
+            value = BigDecimal.valueOf(100.0),
+            valueToInvest = BigDecimal.ZERO
+        ),
+    )
+
     @OptIn(ExperimentalCoroutinesApi::class)
     @BeforeEach
     fun setup() {
@@ -44,66 +107,26 @@ class DashboardViewModelTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `on rebalance click should call rebalance use case`() = runTest {
-        coEvery { rebalanceUseCase(any()) } returns Result.Success(
-            listOf(
-                Investment(
-                    ticker = "A",
-                    weight = BigDecimal.valueOf(0.5),
-                    currentValue = BigDecimal.valueOf(100.0),
-                    valueToInvest = BigDecimal.valueOf(500.0),
-                ),
-                Investment(
-                    ticker = "B",
-                    weight = BigDecimal.valueOf(0.5),
-                    currentValue = BigDecimal.valueOf(100.0),
-                    valueToInvest = BigDecimal.valueOf(500.0),
-                )
-            )
-        )
+        coEvery { rebalanceUseCase(any()) } returns Result.Success(investmentsListMock)
 
         viewModel.event.test {
             viewModel.onRebalanceClick(
-                BigDecimal.valueOf(1000.0), listOf(
-                    InvestmentUIModel(
-                        ticker = "A",
-                        weight = 0.5,
-                        value = BigDecimal.valueOf(100.0),
-                        valueToInvest = BigDecimal.ZERO
-                    ),
-                    InvestmentUIModel(
-                        ticker = "B",
-                        weight = 0.5,
-                        value = BigDecimal.valueOf(100.0),
-                        valueToInvest = BigDecimal.ZERO
-                    )
-                )
+                BigDecimal.valueOf(1000.0),
+                investmentsUiModelListMock,
             )
 
             advanceUntilIdle()
 
             assertEquals(
                 DashboardScreenReducer.DashboardEvent.UpdateRebalanceLoading(isLoading = true),
-                awaitItem()
+                awaitItem(),
             )
 
             assertEquals(
                 DashboardScreenReducer.DashboardEvent.Rebalance(
-                    persistentListOf(
-                        InvestmentUIModel(
-                            ticker = "A",
-                            weight = 0.5,
-                            value = BigDecimal.valueOf(100.0),
-                            valueToInvest = BigDecimal.valueOf(500.0),
-                        ),
-                        InvestmentUIModel(
-                            ticker = "B",
-                            weight = 0.5,
-                            value = BigDecimal.valueOf(100.0),
-                            valueToInvest = BigDecimal.valueOf(500.0),
-                        )
-                    )
+                    rebalancedInvestmentsUiModelListMock
                 ),
-                awaitItem()
+                awaitItem(),
             )
         }
     }

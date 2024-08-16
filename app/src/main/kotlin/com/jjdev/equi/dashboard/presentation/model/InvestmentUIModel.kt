@@ -2,7 +2,7 @@ package com.jjdev.equi.dashboard.presentation.model
 
 import java.math.BigDecimal
 
-class InvestmentUIModel(
+data class InvestmentUIModel(
     val ticker: String,
     val weight: Double,
     val value: BigDecimal,
