@@ -52,11 +52,14 @@ android {
         enableAggregatingTask = true
     }
 
+/*
+    Ready for screenshot testing
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
     
     experimentalProperties["android.experimental.enableScreenshotTest"] = true
+*/
 
     tasks.withType(Test::class) {
         jvmArgs("-Dnet.bytebuddy.experimental=true", "-XX:+EnableDynamicAgentLoading")
