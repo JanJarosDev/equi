@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
     alias(libs.plugins.hilt)
+  //  alias(libs.plugins.screenshot)
     alias(libs.plugins.kapt)
 }
 
@@ -51,10 +52,18 @@ android {
         enableAggregatingTask = true
     }
 
+/*
+    Ready for screenshot testing
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.4"
+    }
+    
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
+*/
+
     tasks.withType(Test::class) {
         jvmArgs("-Dnet.bytebuddy.experimental=true", "-XX:+EnableDynamicAgentLoading")
     }
-
 }
 
 dependencies {
@@ -85,6 +94,9 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation(libs.coroutines.test)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    //Testing
+  //  screenshotTestImplementation(libs.androidx.compose.ui.tooling)
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.turbine)
