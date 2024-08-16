@@ -93,33 +93,51 @@ class DashboardReducer :
             }
 
             is DashboardEvent.UpdateDialogTicker -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        ticker = event.ticker
-                    ) ?: AddInvestmentDialogModel(
-                        ticker = event.ticker
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            ticker = event.ticker
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            ticker = event.ticker
+                        )
+                    ) to null
+                }
             }
 
             is DashboardEvent.UpdateDialogValue -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        value = event.value
-                    ) ?: AddInvestmentDialogModel(
-                        value = event.value
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            value = event.value
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            value = event.value
+                        )
+                    ) to null
+                }
             }
 
             is DashboardEvent.UpdateDialogWeight -> {
-                previousState.copy(
-                    addInvestmentDialogModel = previousState.addInvestmentDialogModel?.copy(
-                        weight = event.weight
-                    ) ?: AddInvestmentDialogModel(
-                        weight = event.weight
-                    )
-                ) to null
+                if (previousState.addInvestmentDialogModel == null) {
+                    previousState.copy(
+                        addInvestmentDialogModel = AddInvestmentDialogModel(
+                            weight = event.weight
+                        )
+                    ) to null
+                } else {
+                    previousState.copy(
+                        addInvestmentDialogModel = previousState.addInvestmentDialogModel.copy(
+                            weight = event.weight
+                        )
+                    ) to null
+                }
             }
         }
     }

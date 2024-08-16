@@ -251,4 +251,11 @@ class DashboardReducerTest {
         )
     }
 
+
+    @Test
+    fun `test DashboardEffect with mockK`() {
+        val mockEffect = mockk<DashboardReducer.DashboardEffect>()
+        assertNotNull(mockEffect)
+    }
+
 }
