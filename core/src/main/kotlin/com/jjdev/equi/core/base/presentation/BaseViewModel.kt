@@ -19,7 +19,7 @@ abstract class BaseViewModel<State : Reducer.ViewState, Event : Reducer.ViewEven
     val state: StateFlow<State>
         get() = _state.asStateFlow()
 
-    private val _event: MutableSharedFlow<Event> = MutableSharedFlow()
+    private val _event: MutableSharedFlow<Event> = MutableSharedFlow(1)
     val event: SharedFlow<Event>
         get() = _event.asSharedFlow()
 
@@ -46,6 +46,8 @@ abstract class BaseViewModel<State : Reducer.ViewState, Event : Reducer.ViewEven
         if (BuildConfig.DEBUG && success) {
             timeCapsule.addState(newState)
         }
+
+        _event.tryEmit(event)
     }
 
     fun sendEventForEffect(event: Event) {

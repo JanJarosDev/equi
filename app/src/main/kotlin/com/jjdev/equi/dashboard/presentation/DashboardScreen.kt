@@ -27,8 +27,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
 import com.jjdev.equi.R
 import com.jjdev.equi.core.ui.theme.dimens
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
+import com.jjdev.equi.dashboard.presentation.DashboardReducer.DashboardEvent
+import com.jjdev.equi.dashboard.presentation.DashboardReducer.DashboardState
 import com.jjdev.equi.dashboard.presentation.model.AddInvestmentDialogModel
 import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import com.jjdev.equi.ui.component.DetailItemsListComponent
