@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlinx.kover)
     alias(libs.plugins.hilt)
-    alias(libs.plugins.screenshot)
+  //  alias(libs.plugins.screenshot)
     alias(libs.plugins.kapt)
 }
 
@@ -96,7 +96,7 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     //Testing
-    screenshotTestImplementation(libs.androidx.compose.ui.tooling)
+  //  screenshotTestImplementation(libs.androidx.compose.ui.tooling)
     testImplementation(libs.mockk)
     testImplementation(libs.junit.jupiter)
     testImplementation(libs.turbine)
