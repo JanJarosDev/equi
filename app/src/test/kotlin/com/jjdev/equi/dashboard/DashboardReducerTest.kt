@@ -3,6 +3,7 @@ package com.jjdev.equi.dashboard
 import com.jjdev.equi.dashboard.presentation.DashboardReducer
 import com.jjdev.equi.dashboard.presentation.model.AddInvestmentDialogModel
 import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
+import io.mockk.mockk
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,6 +12,7 @@ import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.math.BigDecimal
@@ -248,6 +250,5 @@ class DashboardReducerTest {
             )
         )
     }
-
 
 }

@@ -30,7 +30,7 @@ class DashboardReducer :
     }
 
     @Immutable
-    sealed class DashboardEffect : Reducer.ViewEffect
+    object DashboardEffect : Reducer.ViewEffect
 
     @Immutable
     data class DashboardState(
