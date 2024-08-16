@@ -5,9 +5,9 @@ import com.jjdev.equi.core.base.domain.onSuccess
 import com.jjdev.equi.core.base.presentation.BaseViewModel
 import com.jjdev.equi.dashboard.domain.RebalanceUseCase
 import com.jjdev.equi.dashboard.domain.model.Investment
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEffect
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardEvent
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer.DashboardState
+import com.jjdev.equi.dashboard.presentation.DashboardReducer.DashboardEffect
+import com.jjdev.equi.dashboard.presentation.DashboardReducer.DashboardEvent
+import com.jjdev.equi.dashboard.presentation.DashboardReducer.DashboardState
 import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.collections.immutable.ImmutableList
@@ -24,7 +24,7 @@ class DashboardViewModel @Inject constructor(
     private val rebalanceUseCase: RebalanceUseCase,
 ) : BaseViewModel<DashboardState, DashboardEvent, DashboardEffect>(
     initialState = DashboardState.initial(),
-    reducer = DashboardScreenReducer(),
+    reducer = DashboardReducer(),
 ) {
     init {
         Timber.i("Initializing DashboardViewModel")

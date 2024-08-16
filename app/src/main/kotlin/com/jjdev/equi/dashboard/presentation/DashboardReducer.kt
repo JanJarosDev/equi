@@ -9,10 +9,10 @@ import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toPersistentList
 import java.math.BigDecimal
 
-class DashboardScreenReducer :
-    Reducer<DashboardScreenReducer.DashboardState,
-            DashboardScreenReducer.DashboardEvent,
-            DashboardScreenReducer.DashboardEffect> {
+class DashboardReducer :
+    Reducer<DashboardReducer.DashboardState,
+            DashboardReducer.DashboardEvent,
+            DashboardReducer.DashboardEffect> {
     @Immutable
     sealed class DashboardEvent : Reducer.ViewEvent {
         data class UpdateRebalanceLoading(val isLoading: Boolean) : DashboardEvent()

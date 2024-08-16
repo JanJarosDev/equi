@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import com.jjdev.equi.core.base.domain.Result
 import com.jjdev.equi.dashboard.domain.RebalanceUseCase
 import com.jjdev.equi.dashboard.domain.model.Investment
-import com.jjdev.equi.dashboard.presentation.DashboardScreenReducer
+import com.jjdev.equi.dashboard.presentation.DashboardReducer
 import com.jjdev.equi.dashboard.presentation.DashboardViewModel
 import com.jjdev.equi.dashboard.presentation.model.InvestmentUIModel
 import io.mockk.coEvery
@@ -118,12 +118,12 @@ class DashboardViewModelTest {
             advanceUntilIdle()
 
             assertEquals(
-                DashboardScreenReducer.DashboardEvent.UpdateRebalanceLoading(isLoading = true),
+                DashboardReducer.DashboardEvent.UpdateRebalanceLoading(isLoading = true),
                 awaitItem(),
             )
 
             assertEquals(
-                DashboardScreenReducer.DashboardEvent.Rebalance(
+                DashboardReducer.DashboardEvent.Rebalance(
                     rebalancedInvestmentsUiModelListMock
                 ),
                 awaitItem(),
