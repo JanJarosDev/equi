@@ -30,7 +30,7 @@ screenshotVersion = "0.0.1-alpha05"
 mockKVersion = "1.13.12"
 timberVersion = "5.0.1"
 turbineVersion = "1.1.0"
-uiGraphicsAndroidVersion = "1.6.8"
+uiGraphicsAndroidVersion = "1.7.0"
 
 [libraries]
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityComposeVersion" }
