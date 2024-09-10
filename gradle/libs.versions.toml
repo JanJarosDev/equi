@@ -1,6 +1,6 @@
 [versions]
 activityComposeVersion = "1.9.2"
-agpVersion = "8.7.0-beta01"
+agpVersion = "8.8.0-alpha01"
 androidxHiltNavigationComposeVersion = "1.2.0"
 androidxNavigationCompose = "2.8.0"
 appcompatVersion = "1.7.0"
